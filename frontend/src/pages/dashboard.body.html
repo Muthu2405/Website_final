@@ -1,0 +1,645 @@
+
+
+    <!-- ── STARFIELD ── -->
+    <canvas id="stars-canvas"></canvas>
+
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- ──── FRONTEND ──── -->
+
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav-blur fixed w-full z-50 top-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl font-extrabold text-white">Agency<span class="text-primary">.</span></span>
+                    </div>
+                    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                        <a href="#home" class="hover:text-white transition">Home</a>
+                        <a href="#about" class="hover:text-white transition">About</a>
+                        <a href="#team" class="hover:text-white transition">Team</a>
+                        <a href="#services" class="hover:text-white transition">Services</a>
+                        <a href="#portfolio" class="hover:text-white transition">Portfolio</a>
+                        <a href="#process" class="hover:text-white transition">Process</a>
+                        <a href="#pricing" class="hover:text-white transition">Pricing</a>
+                        <a href="#tech-universe" class="hover:text-white transition text-primary">Tech Universe</a>
+                        <a href="#contact" class="hover:text-white transition">Contact</a>
+                    </div>
+                    <div class="hamburger md:hidden" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+                <!-- Mobile menu -->
+                <div id="mobileMenu" class="md:hidden hidden pb-4 border-t border-gray-800 pt-4 flex flex-col gap-3 text-sm font-medium text-gray-300">
+                    <a href="#home" onclick="closeMobileMenu()" class="hover:text-white transition">Home</a>
+                    <a href="#about" onclick="closeMobileMenu()" class="hover:text-white transition">About</a>
+                    <a href="#team" onclick="closeMobileMenu()" class="hover:text-white transition">Team</a>
+                    <a href="#services" onclick="closeMobileMenu()" class="hover:text-white transition">Services</a>
+                    <a href="#portfolio" onclick="closeMobileMenu()" class="hover:text-white transition">Portfolio</a>
+                    <a href="#process" onclick="closeMobileMenu()" class="hover:text-white transition">Process</a>
+                    <a href="#pricing" onclick="closeMobileMenu()" class="hover:text-white transition">Pricing</a>
+                    <a href="#tech-universe" onclick="closeMobileMenu()" class="hover:text-white transition text-primary">Tech Universe</a>
+                    <a href="#contact" onclick="closeMobileMenu()" class="hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ── HOME / HERO ── -->
+        <section id="home" class="hero-space pt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-content py-20">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="reveal-left">
+                        <span class="inline-block bg-blue-500/20 text-blue-300 px-4 py-1 rounded-full text-sm font-medium mb-4 backdrop-blur-sm border border-blue-500/20">
+                            <i class="fas fa-rocket mr-2"></i> Launch Your Digital Presence
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight glow-text">
+                            We Build <span class="text-primary">Amazing</span> Digital Experiences
+                        </h1>
+                        <p class="text-lg text-gray-300 mt-4 max-w-lg">
+                            Full-stack development agency delivering modern, scalable, and high-performance web solutions tailored to your business.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mt-8">
+                            <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane mr-2"></i> Get a Quote</a>
+                            <a href="#portfolio" class="btn-outline"><i class="fas fa-eye mr-2"></i> View Work</a>
+                        </div>
+                        <div class="flex gap-8 mt-10">
+                            <div><span class="stat-number text-white text-3xl font-bold">50+</span><br><span class="text-gray-400 text-sm">Projects Delivered</span></div>
+                            <div><span class="stat-number text-white text-3xl font-bold">30+</span><br><span class="text-gray-400 text-sm">Happy Clients</span></div>
+                            <div><span class="stat-number text-white text-3xl font-bold">4.9</span><br><span class="text-gray-400 text-sm">Avg. Rating</span></div>
+                        </div>
+                    </div>
+                    <!-- ── FLIPPING CARD CAROUSEL ── -->
+                    <div class="flex justify-center reveal-right">
+                        <div class="flip-card-container" id="flipCardContainer">
+                            <div class="flip-card-wrapper" id="flipCardWrapper">
+                                <!-- Front: Image -->
+                                <div class="flip-card-front">
+                                    <img src="Gemini_Generated_Image_urrussurrussurru.png" alt="CYBERNAUTIC Marine Tech" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                                    <div class="brand-overlay" style="display:none;">
+                                        <h2>CYBERNAUTIC</h2>
+                                        <div class="sub">MARINE TECH</div>
+                                        <div class="est">DEEP OCEAN · EST.2026</div>
+                                        <div class="predator">PREDATOR</div>
+                                    </div>
+                                    <!-- fallback if image fails -->
+                                    <div class="brand-overlay" id="fallbackBrand" style="display:none;">
+                                        <h2>CYBERNAUTIC</h2>
+                                        <div class="sub">MARINE TECH</div>
+                                        <div class="est">DEEP OCEAN · EST.2026</div>
+                                        <div class="predator">PREDATOR</div>
+                                    </div>
+                                </div>
+                                <!-- Back: Content -->
+                                <div class="flip-card-back" id="flipCardBack">
+                                    <div class="back-icon" id="backIcon">🌊</div>
+                                    <h3 id="backTitle">Deep Ocean Tech</h3>
+                                    <p id="backDesc">Cutting-edge marine technology solutions for exploration, surveillance, and sustainable ocean operations.</p>
+                                    <div class="back-tags" id="backTags">
+                                        <span>Cybernautic</span>
+                                        <span>Marine Tech</span>
+                                        <span>Deep Ocean</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Indicators -->
+                            <div class="flip-card-indicators" id="flipIndicators">
+                                <span class="dot active" data-index="0"></span>
+                                <span class="dot" data-index="1"></span>
+                                <span class="dot" data-index="2"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── ABOUT ── -->
+        <section id="about" class="section-padding bg-soft-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">About Us</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Who We Are</h2>
+                    <p class="text-gray-400 mt-4">We're a passionate team of developers, designers, and problem-solvers dedicated to crafting exceptional digital solutions.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="reveal-left">
+                        <h3 class="text-2xl font-bold text-white">Our Story</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">
+                            Founded in 2020, we started as a small freelancing team with a big vision — to help businesses of all sizes build powerful online presence. Over the years, we've grown into a trusted agency delivering high-quality web applications, custom development, and digital transformation services.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mt-6">
+                            <div class="bg-dark-card rounded-xl p-4 text-center">
+                                <span class="text-2xl font-bold text-primary">🚀</span>
+                                <p class="text-sm font-medium text-gray-300 mt-1">Agile Process</p>
+                            </div>
+                            <div class="bg-dark-card rounded-xl p-4 text-center">
+                                <span class="text-2xl font-bold text-primary">💡</span>
+                                <p class="text-sm font-medium text-gray-300 mt-1">Innovation First</p>
+                            </div>
+                            <div class="bg-dark-card rounded-xl p-4 text-center">
+                                <span class="text-2xl font-bold text-primary">🤝</span>
+                                <p class="text-sm font-medium text-gray-300 mt-1">Client-Centric</p>
+                            </div>
+                            <div class="bg-dark-card rounded-xl p-4 text-center">
+                                <span class="text-2xl font-bold text-primary">🏆</span>
+                                <p class="text-sm font-medium text-gray-300 mt-1">Quality Focus</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal-right">
+                        <h3 class="text-2xl font-bold text-white">Our Mission & Vision</h3>
+                        <div class="mt-4 space-y-4">
+                            <div class="bg-dark-card rounded-xl p-6">
+                                <h4 class="font-bold text-white"><i class="fas fa-bullseye text-primary mr-2"></i> Mission</h4>
+                                <p class="text-gray-400 mt-1">To empower businesses with cutting-edge web solutions that drive growth, engagement, and success in the digital era.</p>
+                            </div>
+                            <div class="bg-dark-card rounded-xl p-6">
+                                <h4 class="font-bold text-white"><i class="fas fa-eye text-primary mr-2"></i> Vision</h4>
+                                <p class="text-gray-400 mt-1">To become the most trusted development partner for startups and enterprises worldwide, known for innovation, reliability, and excellence.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-bold text-white">Our Core Values</h4>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="tech-tag">Integrity</span>
+                                <span class="tech-tag">Excellence</span>
+                                <span class="tech-tag">Innovation</span>
+                                <span class="tech-tag">Transparency</span>
+                                <span class="tech-tag">Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── TEAM ── -->
+        <!-- ── TEAM (React) ── -->
+        <section id="team" class="section-padding bg-[#0b0e17]/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">Our Team</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Meet the Developers</h2>
+                    <p class="text-gray-400 mt-4">Our crew of space-ready engineers, riding in one at a time.</p>
+                </div>
+                <div id="team-react-mount"></div>
+            </div>
+        </section>
+
+        <!-- ── SERVICES (CAROUSEL) ── -->
+        <section id="services" class="section-padding bg-soft-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">What We Do</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Our Services</h2>
+                    <p class="text-gray-400 mt-4">End-to-end development services tailored to your unique needs.</p>
+                </div>
+                <div class="services-carousel-container" id="servicesCarousel">
+                    <div class="services-carousel-track" id="servicesTrack">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </div>
+                <div class="services-dots" id="servicesDots"></div>
+            </div>
+        </section>
+
+        <!-- ── PORTFOLIO ── -->
+        <section id="portfolio" class="section-padding bg-[#0b0e17]/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">Our Work</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Featured Projects</h2>
+                    <p class="text-gray-400 mt-4">A showcase of our best work across different industries and technologies.</p>
+                </div>
+                <div class="flip-board reveal" id="projectsFlipBoard">
+                    <div class="flip-slot" data-slot="0" data-dir="a">
+                        <div class="slide-viewport">
+                            <div class="slide-face slide-current"></div>
+                            <div class="slide-face slide-incoming"></div>
+                        </div>
+                    </div>
+                    <div class="flip-slot" data-slot="1" data-dir="b">
+                        <div class="slide-viewport">
+                            <div class="slide-face slide-current"></div>
+                            <div class="slide-face slide-incoming"></div>
+                        </div>
+                    </div>
+                    <div class="flip-slot" data-slot="2" data-dir="a">
+                        <div class="slide-viewport">
+                            <div class="slide-face slide-current"></div>
+                            <div class="slide-face slide-incoming"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-gray-500 text-xs mt-5"><i class="fas fa-mouse-pointer mr-1"></i> Auto-rotating showcase · click a panel to view details</p>
+            </div>
+        </section>
+
+        <!-- ── TECH UNIVERSE ── -->
+        <section id="tech-universe" class="tech-universe">
+            <div class="section-header">
+                <div class="badge"><i class="fas fa-rocket"></i> Technology Universe</div>
+                <h2>Explore Our <span>Tech Fleet</span></h2>
+                <p>Hover a rocket to fire its engines, click for details, double-click to launch it.</p>
+            </div>
+            <div style="height:28px;"></div>
+
+            <!-- FRONTEND -->
+            <div class="marquee-wrap" style="--gcolor:#60a5fa;">
+                <div class="galaxy-heading"><span class="dot"></span><h3>Frontend Universe</h3><span class="dot"></span></div>
+                <div class="galaxy-sub">Right to left · hover to ignite</div>
+                <div class="marquee-track-rl" id="frontend-track"></div>
+            </div>
+            <div class="galaxy-rule"></div>
+
+            <!-- BACKEND -->
+            <div class="marquee-wrap" style="--gcolor:#8b5cf6;">
+                <div class="galaxy-heading"><span class="dot"></span><h3>Backend &amp; Database</h3><span class="dot"></span></div>
+                <div class="galaxy-sub">Left to right · hover to ignite</div>
+                <div class="marquee-track-lr" id="backend-track"></div>
+            </div>
+            <div class="galaxy-rule"></div>
+
+            <!-- CLOUD -->
+            <div class="marquee-wrap" style="--gcolor:#f59e0b;">
+                <div class="galaxy-heading"><span class="dot"></span><h3>Cloud &amp; DevOps</h3><span class="dot"></span></div>
+                <div class="galaxy-sub">Right to left · hover to ignite</div>
+                <div class="marquee-track-rl" id="cloud-track"></div>
+            </div>
+
+            <!-- FLEET -->
+            <div class="fleet-section" id="fleetSection">
+                <div class="fleet-header">
+                    <h3><i class="fas fa-flag-checkered text-primary"></i> My Fleet <span id="fleetCount">(0)</span></h3>
+                    <button class="clear-fleet" id="clearFleetBtn"><i class="fas fa-trash-alt"></i> Clear All</button>
+                </div>
+                <div class="fleet-grid" id="fleetGrid"><div class="empty-fleet">No rockets in your fleet yet. Click the checkmark on a rocket to add it.</div></div>
+            </div>
+        </section>
+
+        <!-- ── DEVELOPMENT PROCESS ── -->
+        <section id="process" class="section-padding process-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="section-header reveal">
+                    <div class="badge"><i class="fas fa-satellite"></i> How We Build</div>
+                    <h2>Our Development <span>Process</span></h2>
+                    <p>Seven stages, tied together end to end — each one hands off cleanly into the next.</p>
+                </div>
+            </div>
+            <div class="process-rope-line"></div>
+            <div class="process-track" id="processTrack"></div>
+        </section>
+
+        <!-- ── PRICING ── -->
+        <section id="pricing" class="section-padding bg-[#0b0e17]/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">Pricing</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Simple, Transparent Pricing</h2>
+                    <p class="text-gray-400 mt-4">Choose a plan that fits your project needs. Custom quotes available.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <div class="pricing-card reveal" style="transition-delay:0.1s;">
+                        <h4 class="text-xl font-bold text-white">Basic</h4>
+                        <p class="text-gray-400 text-sm mt-1">For small websites & startups</p>
+                        <div class="mt-4"><span class="text-4xl font-extrabold text-white">$499</span><span class="text-gray-400"> / project</span></div>
+                        <ul class="mt-6 space-y-2 text-sm text-gray-400">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Up to 5 pages</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Responsive design</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Contact form</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Basic SEO</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> 7-day support</li>
+                        </ul>
+                        <a href="#contact" class="btn-primary w-full text-center mt-6 block text-sm">Get Started</a>
+                    </div>
+                    <div class="pricing-card popular reveal" style="transition-delay:0.2s;">
+                        <div class="popular-badge">Most Popular</div>
+                        <h4 class="text-xl font-bold text-white">Standard</h4>
+                        <p class="text-gray-400 text-sm mt-1">For growing businesses</p>
+                        <div class="mt-4"><span class="text-4xl font-extrabold text-white">$999</span><span class="text-gray-400"> / project</span></div>
+                        <ul class="mt-6 space-y-2 text-sm text-gray-400">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Up to 15 pages</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Responsive + animations</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Admin dashboard</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Advanced SEO</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> 30-day support</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Performance optimization</li>
+                        </ul>
+                        <a href="#contact" class="btn-primary w-full text-center mt-6 block text-sm">Get Started</a>
+                    </div>
+                    <div class="pricing-card reveal" style="transition-delay:0.3s;">
+                        <h4 class="text-xl font-bold text-white">Premium</h4>
+                        <p class="text-gray-400 text-sm mt-1">For enterprises & complex apps</p>
+                        <div class="mt-4"><span class="text-4xl font-extrabold text-white">$2,499</span><span class="text-gray-400"> / project</span></div>
+                        <ul class="mt-6 space-y-2 text-sm text-gray-400">
+                            <li><i class="fas fa-check text-primary mr-2"></i> Unlimited pages</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Custom features</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> AI integration</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Full-stack development</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> 90-day support</li>
+                            <li><i class="fas fa-check text-primary mr-2"></i> Deployment & hosting setup</li>
+                        </ul>
+                        <a href="#contact" class="btn-primary w-full text-center mt-6 block text-sm">Get Started</a>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <p class="text-gray-400">Need something custom? <a href="#contact" class="text-primary font-semibold">Contact us</a> for a tailored quote.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── WHY CHOOSE US (MARQUEE, SMALLER CARDS) ── -->
+        <section id="why-us" class="section-padding bg-soft-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">Why Us</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Why Choose Our Agency</h2>
+                    <p class="text-gray-400 mt-4">We deliver quality, reliability, and value with every project.</p>
+                </div>
+                <div class="why-us-marquee">
+                    <div class="why-us-track" id="whyUsTrack">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FAQ ── -->
+        <section id="faq" class="section-padding bg-[#0b0e17]/30">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">FAQ</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Frequently Asked Questions</h2>
+                    <p class="text-gray-400 mt-4">Everything you need to know before getting started.</p>
+                </div>
+                <div class="bg-dark-card rounded-2xl p-6 sm:p-10 reveal space-y-3">
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">How long does development take?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">Timeline depends on project complexity. A basic website takes 7–14 days, while complex web applications can take 4–8 weeks. We'll provide a detailed timeline during discovery.</div>
+                    </div>
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">Do you provide hosting?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">Yes, we can help you set up hosting on platforms like Render, Vercel, or AWS. We also offer ongoing maintenance and hosting management services.</div>
+                    </div>
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">Do you maintain websites?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">Absolutely. We offer maintenance packages that include regular updates, security patches, performance monitoring, and content updates.</div>
+                    </div>
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">Can you redesign an existing website?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">Yes! We specialize in website redesigns — modernizing design, improving UX, optimizing performance, and migrating to modern frameworks.</div>
+                    </div>
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">What technologies do you use?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">We primarily use Django, React, PostgreSQL, Tailwind CSS, and deploy on Render/Vercel. We're flexible and can adapt to your tech stack preferences.</div>
+                    </div>
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">Do you sign NDAs?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">Yes, we're happy to sign NDAs to protect your ideas and sensitive information. Your privacy and trust are our top priorities.</div>
+                    </div>
+                    <div class="faq-item rounded-xl border border-gray-800 hover:border-primary/40 transition-colors">
+                        <div class="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6" onclick="toggleFAQ(this)">
+                            <span class="leading-relaxed">What payment methods do you accept?</span>
+                            <i class="fas fa-chevron-down text-primary shrink-0 transition-transform"></i>
+                        </div>
+                        <div class="faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 hidden">We accept bank transfers, PayPal, and major credit cards. Payment terms are typically 50% upfront and 50% upon completion.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CONTACT ── -->
+        <section id="contact" class="section-padding bg-soft-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-primary font-semibold text-sm uppercase tracking-wider">Get in Touch</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Let's Work Together</h2>
+                    <p class="text-gray-400 mt-4">Have a project in mind? Reach out and let's make something great.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    <div class="reveal-left">
+                        <form id="contactForm" class="space-y-4" onsubmit="handleContact(event)">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                                <input type="text" class="input-field" placeholder="Your name" required />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                                <input type="email" class="input-field" placeholder="your@email.com" required />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                                <input type="text" class="input-field" placeholder="Project idea, question, etc." required />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                                <textarea class="input-field" placeholder="Tell us about your project..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full"><i class="fas fa-paper-plane mr-2"></i> Send Message</button>
+                            <p id="formStatus" class="text-sm text-gray-400 mt-2"></p>
+                        </form>
+                    </div>
+                    <div class="space-y-6 reveal-right">
+                        <div class="bg-dark-card rounded-2xl p-6">
+                            <h4 class="font-bold text-white text-lg"><i class="fas fa-envelope text-primary mr-2"></i> Email</h4>
+                            <p class="text-gray-400">hello@agency.com</p>
+                        </div>
+                        <div class="bg-dark-card rounded-2xl p-6">
+                            <h4 class="font-bold text-white text-lg"><i class="fas fa-phone text-primary mr-2"></i> Phone / WhatsApp</h4>
+                            <p class="text-gray-400">+1 (555) 123-4567</p>
+                        </div>
+                        <div class="bg-dark-card rounded-2xl p-6">
+                            <h4 class="font-bold text-white text-lg"><i class="fas fa-clock text-primary mr-2"></i> Working Hours</h4>
+                            <p class="text-gray-400">Mon – Fri: 9:00 AM – 6:00 PM (EST)</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" class="bg-dark-card p-3 rounded-full border border-gray-800 text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in text-lg"></i></a>
+                            <a href="#" class="bg-dark-card p-3 rounded-full border border-gray-800 text-gray-400 hover:text-white transition"><i class="fab fa-github text-lg"></i></a>
+                            <a href="#" class="bg-dark-card p-3 rounded-full border border-gray-800 text-gray-400 hover:text-white transition"><i class="fab fa-x-twitter text-lg"></i></a>
+                            <a href="#" class="bg-dark-card p-3 rounded-full border border-gray-800 text-gray-400 hover:text-white transition"><i class="fab fa-youtube text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FOOTER ── -->
+        <footer class="text-white pt-16 pb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div>
+                        <span class="text-2xl font-extrabold">Agency<span class="text-primary">.</span></span>
+                        <p class="text-gray-400 text-sm mt-3 max-w-xs">Building digital experiences that drive growth and innovation.</p>
+                        <div class="flex gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-x-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-white mb-3">Quick Links</h5>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#home" class="footer-link">Home</a></li>
+                            <li><a href="#about" class="footer-link">About</a></li>
+                            <li><a href="#team" class="footer-link">Team</a></li>
+                            <li><a href="#services" class="footer-link">Services</a></li>
+                            <li><a href="#contact" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-white mb-3">Services</h5>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="footer-link">Web Development</a></li>
+                            <li><a href="#" class="footer-link">Web Applications</a></li>
+                            <li><a href="#" class="footer-link">AI Integration</a></li>
+                            <li><a href="#" class="footer-link">Backend Development</a></li>
+                            <li><a href="#" class="footer-link">Website Redesign</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-white mb-3">Contact</h5>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><i class="fas fa-envelope mr-2 text-primary"></i> hello@agency.com</li>
+                            <li><i class="fas fa-phone mr-2 text-primary"></i> +1 (555) 123-4567</li>
+                            <li><i class="fas fa-map-marker-alt mr-2 text-primary"></i> 123 Tech St, New York, NY</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+                    <p>&copy; 2026 Agency. All rights reserved.</p>
+                    <div class="flex gap-4 mt-2 sm:mt-0">
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms & Conditions</a>
+                        <a href="#" class="footer-link">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ── MODALS ── -->
+    <div id="serviceModal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('serviceModal')">
+        <div class="modal-content relative">
+            <span class="close-modal" onclick="closeModal('serviceModal')">&times;</span>
+            <h3 class="text-2xl font-bold text-white mb-4">Add New Service</h3>
+            <form class="space-y-4">
+                <div><label class="block text-sm font-medium text-gray-300">Service Name</label><input class="input-field" placeholder="e.g. Mobile App Development" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Description</label><textarea class="input-field" rows="3" placeholder="Describe the service..."></textarea></div>
+                <div><label class="block text-sm font-medium text-gray-300">Starting Price</label><input class="input-field" placeholder="$499" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Delivery Time</label><input class="input-field" placeholder="7-14 days" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Technologies (comma separated)</label><input class="input-field" placeholder="React, Django, PostgreSQL" /></div>
+                <button type="submit" class="btn-primary w-full">Add Service</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="projectModal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('projectModal')">
+        <div class="modal-content relative">
+            <span class="close-modal" onclick="closeModal('projectModal')">&times;</span>
+            <h3 class="text-2xl font-bold text-white mb-4">Add New Project</h3>
+            <form class="space-y-4">
+                <div><label class="block text-sm font-medium text-gray-300">Project Name</label><input class="input-field" placeholder="e.g. E-Commerce Platform" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Description</label><textarea class="input-field" rows="3" placeholder="Project description..."></textarea></div>
+                <div><label class="block text-sm font-medium text-gray-300">Client (or "Personal")</label><input class="input-field" placeholder="Client name or Personal" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Technologies</label><input class="input-field" placeholder="Django, React, PostgreSQL" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">GitHub URL</label><input class="input-field" placeholder="https://github.com/..." /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Live Demo URL</label><input class="input-field" placeholder="https://..." /></div>
+                <button type="submit" class="btn-primary w-full">Add Project</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="teamModal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('teamModal')">
+        <div class="modal-content relative">
+            <span class="close-modal" onclick="closeModal('teamModal')">&times;</span>
+            <h3 class="text-2xl font-bold text-white mb-4">Add Team Member</h3>
+            <form class="space-y-4">
+                <div><label class="block text-sm font-medium text-gray-300">Full Name</label><input class="input-field" placeholder="Name" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Role</label><input class="input-field" placeholder="e.g. Lead Developer" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Specialization</label><input class="input-field" placeholder="e.g. Backend & API Design" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Short Bio</label><textarea class="input-field" rows="2" placeholder="Brief bio..."></textarea></div>
+                <div><label class="block text-sm font-medium text-gray-300">Skills</label><input class="input-field" placeholder="Django, React, PostgreSQL" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Experience (years)</label><input class="input-field" placeholder="e.g. 8" type="number" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Email</label><input class="input-field" placeholder="member@agency.com" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">LinkedIn</label><input class="input-field" placeholder="https://linkedin.com/..." /></div>
+                <div><label class="block text-sm font-medium text-gray-300">GitHub</label><input class="input-field" placeholder="https://github.com/..." /></div>
+                <button type="submit" class="btn-primary w-full">Add Member</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="testimonialModal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('testimonialModal')">
+        <div class="modal-content relative">
+            <span class="close-modal" onclick="closeModal('testimonialModal')">&times;</span>
+            <h3 class="text-2xl font-bold text-white mb-4">Add Testimonial</h3>
+            <form class="space-y-4">
+                <div><label class="block text-sm font-medium text-gray-300">Client Name</label><input class="input-field" placeholder="Name" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Company</label><input class="input-field" placeholder="Company name" /></div>
+                <div><label class="block text-sm font-medium text-gray-300">Review</label><textarea class="input-field" rows="3" placeholder="What they said..."></textarea></div>
+                <div><label class="block text-sm font-medium text-gray-300">Rating (1-5)</label><input class="input-field" placeholder="5" type="number" min="1" max="5" /></div>
+                <button type="submit" class="btn-primary w-full">Add Testimonial</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ── PROJECT DETAIL MODAL ── -->
+    <div id="projectDetailModal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('projectDetailModal')">
+        <div class="modal-content project-modal-content relative" id="projectDetailContent">
+            <span class="close-modal" onclick="closeModal('projectDetailModal')">&times;</span>
+        </div>
+    </div>
+
+    <!-- ── INFO PANEL ── -->
+    <div class="info-panel-overlay" id="infoPanelOverlay">
+        <div class="info-panel" id="infoPanel">
+            <button class="close-btn" id="infoPanelClose">&times;</button>
+            <div class="panel-header">
+                <div class="panel-logo" id="panelLogo">⚛️</div>
+                <div><div class="panel-title" id="panelTitle">React</div><div class="panel-category" id="panelCategory">Frontend</div></div>
+            </div>
+            <div class="panel-body">
+                <div class="desc" id="panelDesc">A JavaScript library for building user interfaces.</div>
+                <div class="meta-grid">
+                    <div class="meta-item"><span class="label">Popularity</span><span class="value" id="panelPopularity">★★★★★</span></div>
+                    <div class="meta-item"><span class="label">Difficulty</span><span class="value" id="panelDifficulty">Intermediate</span></div>
+                    <div class="meta-item"><span class="label">Status</span><span class="value" id="panelStatus">Mastered</span></div>
+                    <div class="meta-item"><span class="label">Category</span><span class="value" id="panelCatLabel">Frontend</span></div>
+                </div>
+                <div class="experience-bar">
+                    <div class="bar-label"><span>Experience</span><span id="panelExpLabel">Advanced</span></div>
+                    <div class="bar-track"><div class="bar-fill" id="panelExpBar" style="width:80%"></div></div>
+                </div>
+                <div class="panel-actions">
+                    <a href="#" class="btn-docs" id="panelDocs"><i class="fas fa-book"></i> Docs</a>
+                    <a href="#" class="btn-site" id="panelSite"><i class="fas fa-external-link-alt"></i> Site</a>
+                    <button class="btn-fleet" id="panelFleetBtn"><i class="fas fa-plus"></i> Add to Fleet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ────────────────────────────────────────────────────────────── -->
+    <!-- JAVASCRIPT                                                   -->
+    <!-- ────────────────────────────────────────────────────────────── -->
+
+    

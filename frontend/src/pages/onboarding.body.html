@@ -1,0 +1,363 @@
+
+    <div id="app">
+        <div id="sky"></div>
+        <div id="stars-layer"></div>
+        <div id="flash"></div>
+
+        <!-- phase: logo -->
+        <div class="phase" id="phase-logo">
+            <svg class="bu-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><radialGradient id="g1" cx="40%" cy="35%"><stop offset="0%" stop-color="#f6d488"/><stop offset="100%" stop-color="#c9791f"/></radialGradient></defs>
+                <path d="M50 10 C 70 10 88 28 88 50 C 88 60 84 68 78 74" fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M50 90 C 30 90 12 72 12 50 C 12 40 16 32 22 26" fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="9" fill="url(#g1)"/>
+                <circle cx="78" cy="74" r="2.4" fill="#f6d488"/><circle cx="22" cy="26" r="2.4" fill="#f6d488"/>
+            </svg>
+            <div class="bu-title">BUSINESS UNIVERSE</div>
+            <div class="bu-tagline">Build <b>·</b> Grow <b>·</b> Succeed</div>
+        </div>
+
+        <!-- phase: caption -->
+        <div class="phase" id="phase-caption">
+            <div class="caption-text">Every successful venture<br />was once just a dream<br /><span class="hi">waiting for its world.</span></div>
+            <div class="rule"></div>
+        </div>
+
+        <!-- rocket -->
+        <svg id="rocket" viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="30" cy="120" rx="10" ry="26" fill="url(#flame)"/>
+            <defs><linearGradient id="flame" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff2c9"/><stop offset="50%" stop-color="#f6b545"/><stop offset="100%" stop-color="#e2543a" stop-opacity="0"/></linearGradient></defs>
+            <path d="M30 4 C 42 22 46 46 46 70 L46 96 L14 96 L14 70 C14 46 18 22 30 4 Z" fill="#e9ecf2"/>
+            <path d="M14 96 L2 118 L14 108 Z" fill="#c9791f"/><path d="M46 96 L58 118 L46 108 Z" fill="#c9791f"/>
+            <circle cx="30" cy="46" r="8" fill="#4fa8e0" stroke="#1a2a3a" stroke-width="2"/>
+        </svg>
+
+        <!-- solar system view -->
+        <div id="solar-view">
+            <div id="orbits"></div>
+            <!-- satellite flyer -->
+            <div id="satellite-trail"></div>
+            <div id="satellite-flyer">🛰️</div>
+        </div>
+        <div id="choose-heading">
+            <div class="eyebrow">Twelve worlds. One decision.</div>
+            <h2>Choose your <em>Business Universe</em></h2>
+        </div>
+        <div id="timer-badge">⏱ <span id="timer-count">8</span>s</div>
+        <div id="row-layer"></div>
+        <div id="footer-line">Your universe. Your business. Your world.</div>
+        <button id="skip-intro">Skip intro</button>
+
+        <!-- registration portal -->
+        <div class="overlay-view" id="portal-view">
+            <div class="overlay-bg"></div>
+            <div class="card">
+                <button class="back-link" id="portal-back">← back to the universe</button>
+                <div class="stepper" id="step-dots">
+                    <div class="step-item active" data-step="0"><div class="step-circle">1</div><div class="step-label">Planet</div></div>
+                    <div class="step-item" data-step="1"><div class="step-circle">2</div><div class="step-label">User Details</div></div>
+                    <div class="step-item" data-step="2"><div class="step-circle">3</div><div class="step-label">Business Info</div></div>
+                    <div class="step-item" data-step="3"><div class="step-circle">4</div><div class="step-label">Security</div></div>
+                </div>
+                <div class="eyebrow" id="portal-eyebrow"></div>
+                <h3 id="portal-title"></h3>
+                <p class="sub" id="portal-sub"></p>
+                <form id="portal-form">
+                    <!-- Step 0: Planet description & domain -->
+                    <div id="step-0" class="step-content">
+                        <div class="field">
+                            <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid var(--glass-border);">
+                                <span style="font-size:36px;" id="step-planet-emoji">🌏</span>
+                                <div>
+                                    <div style="font-weight:600;font-size:16px;" id="step-planet-name">Earth</div>
+                                    <div style="font-size:11px;color:var(--dim);" id="step-planet-cat">Hospitality Businesses</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label style="color:var(--pcol);font-size:11.5px;">Businesses under this planet</label>
+                            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;" id="step-planet-types"></div>
+                        </div>
+                        <div class="field">
+                            <label>Description</label>
+                            <div style="font-size:12.5px;color:var(--dim);line-height:1.65;padding:2px 0;" id="step-planet-desc">This universe is dedicated to hospitality businesses — hotels, resorts, homestays, and more.</div>
+                        </div>
+                        <div class="field-hint" style="margin-bottom:10px;">If your business belongs to one of the above categories, continue.</div>
+                        <div class="step-actions-row">
+                            <button class="btn-secondary" type="button" id="step-0-change">Change Planet</button>
+                            <button class="btn-primary" type="button" id="step-0-next" style="margin-top:0;">Continue →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: User details -->
+                    <div id="step-1" class="step-content" style="display:none;">
+                        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pcol);margin-bottom:10px;">Tell us about yourself</div>
+                        <div class="field field-ic"><label>Full Name *</label><span class="ic">👤</span><input required placeholder="Enter your full name" id="regName" /></div>
+                        <div class="field field-ic"><label>Mobile Number *</label><span class="ic">📱</span><input required type="tel" placeholder="Enter mobile number" id="regPhone" /></div>
+                        <div class="field field-ic"><label>Email Address *</label><span class="ic">📧</span><input required type="email" placeholder="Enter email address" id="regEmail" /></div>
+                        <div class="field field-ic"><label>Referral Code (Optional)</label><span class="ic">🎁</span><input placeholder="Enter referral code" id="regReferral" /></div>
+                        <div class="field"><label>Business Role *</label><select required id="regRole">
+                            <option value="">Select your role</option>
+                            <option value="Owner">Owner</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Staff">Staff</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Other">Other</option>
+                        </select></div>
+                        <div class="step-actions-row">
+                            <button class="btn-secondary" type="button" id="step-1-back">← Back</button>
+                            <button class="btn-primary" type="button" id="step-1-next" style="margin-top:0;">Continue →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Business details -->
+                    <div id="step-2" class="step-content" style="display:none;">
+                        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pcol);margin-bottom:10px;">Business Information</div>
+                        <div class="field field-ic"><label>Company / Business Name *</label><span class="ic">🏢</span><input required placeholder="Enter company or hotel name" id="regBusiness" /></div>
+                        <div class="row2">
+                            <div class="field"><label>Business Type *</label><select required id="regType"></select></div>
+                            <div class="field"><label>Category *</label><select required id="regCategory"></select></div>
+                        </div>
+                        <div class="field field-ic"><label>Location *</label><span class="ic">📍</span><input required placeholder="Enter your location" id="regLocation" /></div>
+                        <div class="row2">
+                            <div class="field"><label>City *</label><input required placeholder="Enter city" id="regCity" /></div>
+                            <div class="field"><label>State *</label><input required placeholder="Enter state" id="regState" /></div>
+                        </div>
+                        <div class="row2">
+                            <div class="field"><label>Country *</label><select required id="regCountry">
+                                <option value="">Select country</option>
+                                <option>India</option><option>United States</option><option>United Kingdom</option>
+                                <option>United Arab Emirates</option><option>Canada</option><option>Australia</option>
+                                <option>Other</option>
+                            </select></div>
+                            <div class="field"><label>Pincode *</label><input required placeholder="Enter pincode" id="regPincode" /></div>
+                        </div>
+                        <div class="field field-ic"><label>Website (Optional)</label><span class="ic">🔗</span><input placeholder="https://yourwebsite.com" id="regWebsite" /></div>
+                        <div class="step-actions-row">
+                            <button class="btn-secondary" type="button" id="step-2-back">← Back</button>
+                            <button class="btn-primary" type="button" id="step-2-next" style="margin-top:0;">Continue →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Password -->
+                    <div id="step-3" class="step-content" style="display:none;">
+                        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pcol);margin-bottom:10px;">Secure Your Account</div>
+                        <div class="field field-ic"><label>Username (Optional)</label><span class="ic">🙂</span><input placeholder="Choose a username" id="regUsername" /></div>
+                        <div class="field field-ic">
+                            <label>Password *</label><span class="ic">🔒</span>
+                            <input required type="password" placeholder="Enter password" id="regPass" oninput="updatePwStrength()" />
+                            <div class="pw-meter"><div class="seg" id="pwseg1"></div><div class="seg" id="pwseg2"></div><div class="seg" id="pwseg3"></div><div class="seg" id="pwseg4"></div></div>
+                            <div class="pw-strength-label" id="pwStrengthLabel">Password strength</div>
+                        </div>
+                        <div class="field field-ic"><label>Confirm Password *</label><span class="ic">🔒</span><input required type="password" placeholder="Confirm password" id="regPass2" /></div>
+                        <div style="margin-top:16px;">
+                            <label class="check-row"><input type="checkbox" id="agreeTerms" /> I agree to the <a>Terms &amp; Conditions</a></label>
+                            <label class="check-row"><input type="checkbox" id="agreePrivacy" /> I agree to the <a>Privacy Policy</a></label>
+                            <label class="check-row"><input type="checkbox" id="agreeMarketing" /> I want to receive updates and offers via email</label>
+                        </div>
+                        <div class="step-actions-row">
+                            <button class="btn-secondary" type="button" id="step-3-back">← Back</button>
+                            <button class="btn-primary" type="submit" style="margin-top:0;">Create Account 🚀</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="switch-line">Already registered? <a id="portal-to-login">Log in instead</a></div>
+            </div>
+        </div>
+
+        <!-- success -->
+        <div class="overlay-view" id="success-view">
+            <div class="overlay-bg"></div>
+            <div class="success-view" style="position:relative;z-index:2;">
+                <div class="icon-badge ok">✅</div>
+                <h2 id="success-title">Welcome to Earth! 🎉</h2>
+                <p id="success-sub"></p>
+                <button class="btn-primary" id="success-continue" style="max-width:240px;">Go to Login</button>
+                <div class="redirect-note" style="margin-top:14px;">Redirecting in <span id="redirectCount">3</span> seconds…</div>
+            </div>
+        </div>
+
+        <!-- login -->
+        <div class="overlay-view" id="login-view">
+            <div class="overlay-bg"></div>
+            <div class="card" style="text-align:center;">
+                <button class="back-link" id="login-back" style="text-align:left;">← back to the universe</button>
+                <div class="icon-badge" id="login-icon-badge">🚪</div>
+                <h3 style="font-size:24px;text-align:center;">Welcome Back!</h3>
+                <p class="sub" id="login-eyebrow" style="text-align:center;">Login to your Business Universe</p>
+                <form id="login-form" style="text-align:left;">
+                    <div class="field field-ic"><label>Email Address</label><span class="ic">📧</span><input required type="email" placeholder="Enter your email" id="loginEmail" /></div>
+                    <div class="field field-ic"><label>Password</label><span class="ic">🔒</span><input required type="password" placeholder="Enter your password" id="loginPass" /></div>
+                    <a class="forgot-link" id="forgot-pass-link">Forgot Password?</a>
+                    <button class="btn-primary" type="submit">Login</button>
+                </form>
+                <div class="switch-line">Don't have an account? <a id="login-to-portal">Create Account</a></div>
+            </div>
+        </div>
+
+        <!-- dashboard -->
+        <div id="dash-view">
+            <canvas id="dash-fx"></canvas>
+            <div class="dash-top">
+                <div class="dash-brand" id="dash-brand-click">BUSINESS <em>Universe</em></div>
+                <div class="dash-who"><span id="dash-who-name"></span><div class="dash-dot" id="dash-dot"></div></div>
+            </div>
+            <div class="dash-body" id="dash-body">
+                <div class="tag" id="dash-tag"></div>
+                <h1 id="dash-h1"></h1>
+                <p class="lead" id="dash-p"></p>
+                <div class="dash-grid" id="dash-grid"></div>
+                <div class="dash-actions">
+                    <button class="ghost-btn" id="dash-logout">Log out</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- admin toggle -->
+        <button id="admin-toggle">⚙ Admin</button>
+
+        <!-- admin panel -->
+        <div id="admin-view">
+            <div class="admin-top">
+                <h2>BUSINESS <em>Universe</em> · Admin</h2>
+                <div class="admin-actions" id="admin-tabs">
+                    <button class="active-tab" data-tab="users">👤 Users</button>
+                    <button data-tab="services">📦 Services</button>
+                    <button data-tab="projects">🖼 Projects</button>
+                    <button data-tab="team">👥 Team</button>
+                    <button data-tab="testimonials">⭐ Testimonials</button>
+                    <button data-tab="enquiries">📩 Enquiries</button>
+                    <button data-tab="pricing">💰 Pricing</button>
+                    <button id="admin-close">✕ Close</button>
+                </div>
+            </div>
+            <div class="admin-body" id="admin-body">
+                <!-- Users -->
+                <div class="admin-section active" id="section-users">
+                    <h3>👤 Registered Users</h3>
+                    <p class="sub">All users who have created accounts via the planet portal.</p>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table" id="users-table">
+                            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Business</th><th>Planet</th><th>Joined</th></tr></thead>
+                            <tbody id="users-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="admin-section" id="section-services">
+                    <h3>📦 Manage Services</h3>
+                    <p class="sub">Add, edit or remove services offered.</p>
+                    <div class="admin-form-row" id="service-form">
+                        <div class="field"><label>Service name</label><input id="svc-name" placeholder="e.g. Web Development" /></div>
+                        <div class="field"><label>Category</label><input id="svc-cat" placeholder="e.g. Development" /></div>
+                        <div class="field"><label>Starting price ($)</label><input id="svc-price" placeholder="e.g. 500" /></div>
+                        <div class="field"><label>Delivery time</label><input id="svc-time" placeholder="e.g. 2 weeks" /></div>
+                        <div class="field field-full"><label>Description</label><textarea id="svc-desc" rows="2" placeholder="What this service includes..."></textarea></div>
+                        <div class="field field-full"><label>Technologies</label><input id="svc-tech" placeholder="e.g. Python, React, Django" /></div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="svc-save">Add Service</button>
+                            <button class="btn-secondary" id="svc-cancel" style="display:none;">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table"><thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Time</th><th>Actions</th></tr></thead><tbody id="services-table-body"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="admin-section" id="section-projects">
+                    <h3>🖼 Manage Projects</h3>
+                    <p class="sub">Portfolio projects with images and descriptions.</p>
+                    <div class="admin-form-row" id="project-form">
+                        <div class="field"><label>Project name</label><input id="proj-name" placeholder="e.g. Ecom Store" /></div>
+                        <div class="field"><label>Client</label><input id="proj-client" placeholder="e.g. Acme Inc" /></div>
+                        <div class="field"><label>Technologies</label><input id="proj-tech" placeholder="e.g. React, Django" /></div>
+                        <div class="field"><label>Live Demo URL</label><input id="proj-url" placeholder="https://..." /></div>
+                        <div class="field field-full"><label>Description</label><textarea id="proj-desc" rows="2" placeholder="Project overview..."></textarea></div>
+                        <div class="field field-full"><label>Image URL</label><input id="proj-img" placeholder="https://... or /images/..." /></div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="proj-save">Add Project</button>
+                            <button class="btn-secondary" id="proj-cancel" style="display:none;">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table"><thead><tr><th>Name</th><th>Client</th><th>Tech</th><th>Actions</th></tr></thead><tbody id="projects-table-body"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- Team -->
+                <div class="admin-section" id="section-team">
+                    <h3>👥 Manage Team Members</h3>
+                    <p class="sub">Add or remove team members.</p>
+                    <div class="admin-form-row" id="team-form">
+                        <div class="field"><label>Name</label><input id="team-name" placeholder="e.g. Jane Doe" /></div>
+                        <div class="field"><label>Role</label><input id="team-role" placeholder="e.g. Lead Developer" /></div>
+                        <div class="field"><label>Skills</label><input id="team-skills" placeholder="e.g. React, Python" /></div>
+                        <div class="field"><label>Experience (years)</label><input id="team-exp" placeholder="e.g. 5" /></div>
+                        <div class="field field-full"><label>Bio</label><textarea id="team-bio" rows="2" placeholder="Short bio..."></textarea></div>
+                        <div class="field field-full"><label>Photo URL</label><input id="team-photo" placeholder="https://... or /images/..." /></div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="team-save">Add Member</button>
+                            <button class="btn-secondary" id="team-cancel" style="display:none;">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table"><thead><tr><th>Name</th><th>Role</th><th>Skills</th><th>Actions</th></tr></thead><tbody id="team-table-body"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="admin-section" id="section-testimonials">
+                    <h3>⭐ Manage Testimonials</h3>
+                    <p class="sub">Client reviews and ratings.</p>
+                    <div class="admin-form-row" id="testimonial-form">
+                        <div class="field"><label>Client name</label><input id="test-name" placeholder="e.g. John Smith" /></div>
+                        <div class="field"><label>Company</label><input id="test-company" placeholder="e.g. Acme Corp" /></div>
+                        <div class="field"><label>Rating (1-5)</label><input id="test-rating" type="number" min="1" max="5" placeholder="5" /></div>
+                        <div class="field field-full"><label>Review</label><textarea id="test-review" rows="2" placeholder="What they said..."></textarea></div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="test-save">Add Testimonial</button>
+                            <button class="btn-secondary" id="test-cancel" style="display:none;">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table"><thead><tr><th>Client</th><th>Company</th><th>Rating</th><th>Actions</th></tr></thead><tbody id="testimonials-table-body"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- Enquiries -->
+                <div class="admin-section" id="section-enquiries">
+                    <h3>📩 Contact Enquiries</h3>
+                    <p class="sub">Messages sent from the contact form.</p>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Message</th><th>Date</th></tr></thead><tbody id="enquiries-table-body"></tbody></table>
+                    </div>
+                </div>
+
+                <!-- Pricing -->
+                <div class="admin-section" id="section-pricing">
+                    <h3>💰 Manage Pricing</h3>
+                    <p class="sub">Pricing plans and packages.</p>
+                    <div class="admin-form-row" id="pricing-form">
+                        <div class="field"><label>Plan name</label><input id="price-name" placeholder="e.g. Basic" /></div>
+                        <div class="field"><label>Price ($)</label><input id="price-amount" placeholder="e.g. 299" /></div>
+                        <div class="field"><label>Features (comma separated)</label><input id="price-features" placeholder="e.g. 1 page, responsive, 1 revision" /></div>
+                        <div class="field field-full"><label>Description</label><textarea id="price-desc" rows="2" placeholder="What this plan includes..."></textarea></div>
+                        <div class="form-actions">
+                            <button class="btn-primary" id="price-save">Add Plan</button>
+                            <button class="btn-secondary" id="price-cancel" style="display:none;">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table"><thead><tr><th>Plan</th><th>Price</th><th>Features</th><th>Actions</th></tr></thead><tbody id="pricing-table-body"></tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- toast -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    
