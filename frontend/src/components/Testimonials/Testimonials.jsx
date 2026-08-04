@@ -1,65 +1,14 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { cn } from '../../lib/utils';
 import { useData } from '../../context/DataContext';
 
 const PLACEHOLDER_TESTIMONIALS = [
-    {
-        text: "Working with this team was a game changer. The site was delivered fast and looks incredible.",
-        highlight: "game changer",
-        name: "Sarah Chen",
-        role: "Founder, Lumen Studio"
-    },
-    {
-        text: "They understood our vision immediately and shipped a product that exceeded expectations.",
-        highlight: "exceeded expectations",
-        name: "Marcus Webb",
-        role: "CTO, Northbeam"
-    },
-    {
-        text: "Communication was excellent throughout, and the final result was polished and performant.",
-        highlight: "polished and performant",
-        name: "Priya Nair",
-        role: "Product Lead, Fintra"
-    },
-    {
-        text: "Our conversion rate jumped noticeably after the redesign. Couldn't be happier with the outcome.",
-        highlight: "conversion rate jumped",
-        name: "Daniel Ortiz",
-        role: "Marketing Director, Vellum"
-    },
-    {
-        text: "From kickoff to launch, everything felt effortless. Genuinely the smoothest project we've run.",
-        highlight: "smoothest project",
-        name: "Elena Vasquez",
-        role: "Head of Growth, Northline"
-    },
-    {
-        text: "The attention to detail was obvious in every screen. Our users noticed the difference immediately.",
-        highlight: "attention to detail",
-        name: "James Okafor",
-        role: "Founder, Driftworks"
-    },
-    {
-        text: "Support was there whenever we needed it, and the team clearly cared about getting things right.",
-        highlight: "cared about getting things right",
-        name: "Renee Adeyemi",
-        role: "COO, Fieldstone"
-    },
-    {
-        text: "The new build is faster, cleaner, and noticeably easier for our customers to navigate.",
-        highlight: "faster, cleaner",
-        name: "Tomas Novak",
-        role: "Head of Product, Vantree"
-    },
-    {
-        text: "Every milestone shipped on time, and the quality never slipped as the scope grew.",
-        highlight: "quality never slipped",
-        name: "Ingrid Solberg",
-        role: "VP Engineering, Halcyon"
-    }
+    { quote: "Working with this team was a game changer. The site was delivered fast and looks incredible.", name: "Sarah Chen", role: "Founder, Lumen Studio" },
+    { quote: "They understood our vision immediately and shipped a product that exceeded expectations.", name: "Marcus Webb", role: "CTO, Northbeam" },
+    { quote: "Communication was excellent throughout, and the final result was polished and performant.", name: "Priya Nair", role: "Product Lead, Fintra" },
+    { quote: "Our conversion rate jumped noticeably after the redesign. Couldn't be happier with the outcome.", name: "Daniel Ortiz", role: "Marketing Director, Vellum" },
 ];
 
-// Deterministic color per name so the same person always gets the same avatar color
 const AVATAR_COLORS = ['#3b82f6', '#8b5cf6', '#06b6d4', '#f97316', '#ec4899', '#22c55e'];
 
 function colorForName(name = '') {
@@ -87,108 +36,46 @@ function initialsAvatar(name) {
 
 const FALLBACK_TEXT = "A great experience working with this team from start to finish.";
 
-function TestimonialCard({ text, review, highlight, image, name, role, company }) {
-    // Legacy onboarding seed data stores { review, company } instead of
-    // { text, role } — support both shapes so every card renders real content.
-    const rawText = text || review;
-    const safeName = name || 'Anonymous Client';
-    const safeRole = role || company || 'Client';
-    const safeText = rawText && rawText.trim() ? rawText : FALLBACK_TEXT;
-    const avatarSrc = image || initialsAvatar(safeName);
-
-    return (
-        <motion.li
-            whileHover={{
-                scale: 1.03,
-                y: -8,
-                transition: { type: 'spring', stiffness: 400, damping: 17 }
-            }}
-            whileFocus={{
-                scale: 1.03,
-                y: -8,
-                transition: { type: 'spring', stiffness: 400, damping: 17 }
-            }}
-            tabIndex={0}
-            className="p-8 rounded-3xl border border-gray-800 shadow-lg shadow-black/20 max-w-xs w-full bg-white/5 backdrop-blur-sm transition-colors duration-300 cursor-default select-none group focus:outline-none focus:ring-2 focus:ring-primary/40"
-        >
-            <blockquote className="m-0 p-0">
-                <p className="text-gray-300 leading-relaxed font-normal m-0">
-                    {highlight && safeText.includes(highlight)
-                        ? safeText.split(highlight).map((part, idx, arr) => (
-                            <React.Fragment key={idx}>
-                                {part}
-                                {idx !== arr.length - 1 && (
-                                    <span className="text-primary font-semibold">{highlight}</span>
-                                )}
-                            </React.Fragment>
-                        ))
-                        : safeText}
-                </p>
-                <footer className="flex items-center gap-3 mt-6">
-                    <img
-                        width={40}
-                        height={40}
-                        src={avatarSrc}
-                        alt={safeName}
-                        loading="lazy"
-                        onError={(e) => { e.currentTarget.src = initialsAvatar(safeName); }}
-                        className="h-10 w-10 rounded-full object-cover ring-2 ring-gray-800 group-hover:ring-primary/40 transition-all duration-300 ease-in-out"
-                    />
-                    <div className="flex flex-col">
-                        <cite className="font-semibold not-italic tracking-tight leading-5 text-white">
-                            {safeName}
-                        </cite>
-                        <span className="text-sm leading-5 tracking-tight text-gray-500 mt-0.5">
-                            {safeRole}
-                        </span>
-                    </div>
-                </footer>
-            </blockquote>
-        </motion.li>
-    );
-}
-
-function TestimonialsColumn({ testimonials, className, duration = 15 }) {
-    return (
-        <div className={className}>
-            <motion.ul
-                animate={{ translateY: '-50%' }}
-                transition={{
-                    duration,
-                    repeat: Infinity,
-                    ease: 'linear',
-                    repeatType: 'loop',
-                }}
-                className="flex flex-col gap-6 pb-6 list-none m-0 p-0"
-            >
-                {[0, 1].map((rep) => (
-                    <React.Fragment key={rep}>
-                        {testimonials.map((t, i) => (
-                            <TestimonialCard key={`${rep}-${i}`} {...t} />
-                        ))}
-                    </React.Fragment>
-                ))}
-            </motion.ul>
-        </div>
-    );
+// Normalize either data shape { text/review, name, role/company, image } into { quote, author, role, avatar }
+function normalize(raw) {
+    const quote = raw.quote || raw.text || raw.review;
+    const author = raw.name || raw.author || 'Anonymous Client';
+    const role = raw.role || raw.company || 'Client';
+    const safeQuote = quote && quote.trim() ? quote : FALLBACK_TEXT;
+    return {
+        quote: safeQuote,
+        author,
+        role,
+        avatar: raw.image || raw.avatar || initialsAvatar(author)
+    };
 }
 
 export default function Testimonials() {
     const { testimonials: contextTestimonials } = useData();
-    const testimonials = contextTestimonials && contextTestimonials.length > 0
+    const source = contextTestimonials && contextTestimonials.length > 0
         ? contextTestimonials
         : PLACEHOLDER_TESTIMONIALS;
+    const testimonials = source.map(normalize);
 
-    // Split into up to 3 columns, filling each as evenly as possible
-    // and cycling through the source list if there aren't enough items.
-    const perColumn = Math.max(3, Math.ceil(testimonials.length / 3));
-    const extended = testimonials.length >= perColumn * 3
-        ? testimonials
-        : Array.from({ length: perColumn * 3 }, (_, i) => testimonials[i % testimonials.length]);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [displayedQuote, setDisplayedQuote] = useState(testimonials[0]?.quote || FALLBACK_TEXT);
+    const [displayedRole, setDisplayedRole] = useState(testimonials[0]?.role || 'Client');
+    const [hoveredIndex, setHoveredIndex] = useState(null);
 
-    const firstColumn = extended.slice(0, perColumn);
-    const secondColumn = extended.slice(perColumn, perColumn * 2);
-    const thirdColumn = extended.slice(perColumn * 2, perColumn * 3);
+    const handleSelect = (index) => {
+        if (index === activeIndex || isAnimating) return;
+        setIsAnimating(true);
+
+        setTimeout(() => {
+            setDisplayedQuote(testimonials[index].quote);
+            setDisplayedRole(testimonials[index].role);
+            setActiveIndex(index);
+            setTimeout(() => setIsAnimating(false), 400);
+        }, 200);
+    };
+
+    if (testimonials.length === 0) return null;
 
     return (
         <section id="testimonials" className="section-padding relative overflow-hidden">
@@ -200,14 +87,95 @@ export default function Testimonials() {
                 </div>
             </div>
 
-            <div
-                className="flex justify-center gap-6 mt-12 lg:mt-16 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[740px] overflow-hidden"
-                role="region"
-                aria-label="Scrolling Testimonials"
-            >
-                <TestimonialsColumn testimonials={firstColumn} duration={15} />
-                <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-                <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+            <div className="flex flex-col items-center gap-10 py-16">
+                {/* Quote Container */}
+                <div className="relative px-8">
+                    <span className="absolute -left-2 -top-6 text-7xl font-serif text-white/[0.06] select-none pointer-events-none">
+                        "
+                    </span>
+
+                    <p
+                        className={cn(
+                            "text-2xl md:text-3xl font-light text-white text-center max-w-lg leading-relaxed transition-all duration-400 ease-out",
+                            isAnimating ? "opacity-0 blur-sm scale-[0.98]" : "opacity-100 blur-0 scale-100",
+                        )}
+                    >
+                        {displayedQuote}
+                    </p>
+
+                    <span className="absolute -right-2 -bottom-8 text-7xl font-serif text-white/[0.06] select-none pointer-events-none">
+                        "
+                    </span>
+                </div>
+
+                <div className="flex flex-col items-center gap-6 mt-2">
+                    {/* Role text */}
+                    <p
+                        className={cn(
+                            "text-xs text-gray-400 tracking-[0.2em] uppercase transition-all duration-500 ease-out",
+                            isAnimating ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0",
+                        )}
+                    >
+                        {displayedRole}
+                    </p>
+
+                    <div className="flex items-center justify-center gap-2 flex-wrap">
+                        {testimonials.map((testimonial, index) => {
+                            const isActive = activeIndex === index;
+                            const isHovered = hoveredIndex === index && !isActive;
+                            const showName = isActive || isHovered;
+
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => handleSelect(index)}
+                                    onMouseEnter={() => setHoveredIndex(index)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
+                                    className={cn(
+                                        "relative flex items-center rounded-full cursor-pointer",
+                                        "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                                        isActive ? "bg-white shadow-lg" : "bg-transparent hover:bg-white/10",
+                                        showName ? "gap-2 pl-2 py-1.5" : "gap-0 p-0.5",
+                                    )}
+                                    style={showName ? { paddingRight: '16px' } : undefined}
+                                >
+                                    {/* Avatar with smooth ring animation */}
+                                    <div className="relative flex-shrink-0">
+                                        <img
+                                            src={testimonial.avatar}
+                                            alt={testimonial.author}
+                                            onError={(e) => { e.currentTarget.src = initialsAvatar(testimonial.author); }}
+                                            className={cn(
+                                                "rounded-full object-cover",
+                                                "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                                                isActive ? "w-8 h-8 ring-2 ring-white" : "w-8 h-8 ring-0 hover:scale-105",
+                                            )}
+                                        />
+                                    </div>
+
+                                    <div
+                                        className={cn(
+                                            "grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                                            showName ? "grid-cols-[1fr] opacity-100" : "grid-cols-[0fr] opacity-0",
+                                        )}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <span
+                                                className={cn(
+                                                    "text-sm font-semibold whitespace-nowrap block",
+                                                    "transition-colors duration-300",
+                                                    isActive ? "text-gray-900" : "text-gray-200",
+                                                )}
+                                            >
+                                                {testimonial.author}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
         </section>
     );

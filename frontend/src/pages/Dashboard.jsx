@@ -21,10 +21,37 @@ export default function Dashboard() {
     document.body.classList.add('dashboard-active');
 
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up');
+    const revealedNodes = new Set();
+    const classObservers = new Map();
+
+    // React owns `className` on these elements. Once a data-driven re-render
+    // happens (e.g. testimonials/portfolio data arriving from the API), React
+    // reconciles className back to its JSX value and silently strips the
+    // 'visible' class we add here. A MutationObserver lets us notice that and
+    // re-apply 'visible' immediately, so the reveal survives re-renders.
+    const ensureVisible = (el) => {
+      if (!el.classList.contains('visible')) {
+        el.classList.add('visible');
+      }
+    };
+
+    const watchForReactOverwrite = (el) => {
+      if (classObservers.has(el)) return;
+      const mo = new MutationObserver(() => {
+        if (revealedNodes.has(el) && !el.classList.contains('visible')) {
+          ensureVisible(el);
+        }
+      });
+      mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+      classObservers.set(el, mo);
+    };
+
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          revealedNodes.add(entry.target);
+          ensureVisible(entry.target);
+          watchForReactOverwrite(entry.target);
           revealObserver.unobserve(entry.target);
         }
       });
@@ -36,6 +63,9 @@ export default function Dashboard() {
       document.documentElement.classList.remove('dashboard-active');
       document.body.classList.remove('dashboard-active');
       revealObserver.disconnect();
+      classObservers.forEach((mo) => mo.disconnect());
+      classObservers.clear();
+      revealedNodes.clear();
     };
   }, []);
 

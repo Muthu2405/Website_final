@@ -2497,16 +2497,17 @@ section + section {
         }
         textarea.input-field {
             resize: vertical;
-            min-height: 120px;
+            min-height: 80px;
         }
 
         /* ── CONTACT — FORM FIELD SPACING ── */
         .contact-field {
-            margin-bottom: var(--space-md); /* 24px between each label+input group */
+            margin-bottom: 14px; /* tighter spacing between each label+input group */
         }
         .contact-field label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            font-size: 0.8125rem;
         }
         .contact-field:last-of-type {
             margin-bottom: 0;
