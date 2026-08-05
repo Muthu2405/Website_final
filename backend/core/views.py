@@ -91,7 +91,17 @@ def logout(request):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(["GET"])
+@api_view(["GET", "PATCH"])
 @permission_classes([IsAuthenticated])
 def me(request):
-    return Response(BusinessUserSerializer(request.user).data)
+    if request.method == "GET":
+        return Response(BusinessUserSerializer(request.user).data)
+
+    # PATCH — partial update of the logged-in user's own profile.
+    # Password/username changes are intentionally excluded here; add a
+    # dedicated change-password endpoint later if needed.
+    data = {k: v for k, v in request.data.items() if k not in ("password", "username", "planet_id", "auth_token")}
+    serializer = BusinessUserSerializer(request.user, data=data, partial=True)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)

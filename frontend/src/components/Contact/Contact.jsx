@@ -19,8 +19,8 @@ export default function Contact({
     return (
         <section id="contact" className="section-padding bg-soft-dark">
             <div className="site-container">
-                <div className="mx-auto flex max-w-screen-xl flex-col justify-between gap-10 lg:flex-row lg:gap-20">
-                    <div className="mx-auto flex max-w-sm flex-col justify-between gap-10 reveal-left">
+                <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-10 lg:items-start">
+                    <div className="flex flex-col justify-between gap-10 reveal-left">
                         <div className="text-center lg:text-left">
                             <span className="text-primary font-semibold text-sm uppercase tracking-wider">Get in Touch</span>
                             <h2 className="mb-2 mt-2 text-3xl sm:text-4xl font-extrabold text-white lg:mb-1">
@@ -28,7 +28,7 @@ export default function Contact({
                             </h2>
                             <p className="text-gray-400 mt-4">{description}</p>
                         </div>
-                        <div className="mx-auto w-fit lg:mx-0">
+                        <div className="w-full">
                             <h3 className="mb-6 text-center text-2xl font-semibold text-white lg:text-left">
                                 Contact Details
                             </h3>
@@ -58,7 +58,7 @@ export default function Contact({
                             </div>
                         </div>
                     </div>
-                    <div className="mx-auto flex w-full max-w-md flex-col gap-4 rounded-2xl border border-gray-800 bg-dark-card reveal-right" style={{ padding: '32px' }}>
+                    <div className="mx-auto flex w-full max-w-md flex-col gap-4 rounded-2xl border border-gray-800 bg-dark-card reveal-right lg:mx-0" style={{ padding: '32px' }}>
                         <form id="contactForm" className="space-y-3" onSubmit={handleContact}>
                             <div className="flex gap-3">
                                 <div className="contact-field w-full">

@@ -111,6 +111,7 @@ export const auth = {
         }
     },
     me: () => request('/auth/me/', { auth: true }),
+    updateMe: (payload) => request('/auth/me/', { method: 'PATCH', body: payload, auth: true }),
     isAuthenticated: () => Boolean(getToken()),
 };
 
