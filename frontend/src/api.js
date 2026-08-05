@@ -32,7 +32,7 @@ class ApiError extends Error {
 }
 
 /**
- * Core request helper. Adds the auth token (if present), JSON-encodes the
+ * Core request helper. Adds the auth token (if present and required), JSON-encodes the
  * body, and throws ApiError with the parsed error payload on non-2xx.
  */
 async function request(path, { method = 'GET', body, headers = {}, auth: requireAuth = false } = {}) {
@@ -45,7 +45,7 @@ async function request(path, { method = 'GET', body, headers = {}, auth: require
         method,
         headers: {
             'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Token ${token}` } : {}),
+            ...(requireAuth && token ? { Authorization: `Token ${token}` } : {}),
             ...headers,
         },
         body: body !== undefined ? JSON.stringify(body) : undefined,

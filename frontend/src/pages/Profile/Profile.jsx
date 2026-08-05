@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StarfieldBackground from '../../components/StarfieldBackground/StarfieldBackground';
 import Nav from '../../components/Nav/Nav';
@@ -8,6 +8,7 @@ import { useData } from '../../context/DataContext';
 const FIELD_GROUPS = [
     {
         title: 'Personal Info',
+        icon: 'fa-user',
         fields: [
             { key: 'name', label: 'Full Name', type: 'text' },
             { key: 'email', label: 'Email', type: 'email' },
@@ -17,6 +18,7 @@ const FIELD_GROUPS = [
     },
     {
         title: 'Business Info',
+        icon: 'fa-briefcase',
         fields: [
             { key: 'business', label: 'Business Name', type: 'text' },
             { key: 'type', label: 'Business Type', type: 'text' },
@@ -26,6 +28,7 @@ const FIELD_GROUPS = [
     },
     {
         title: 'Location',
+        icon: 'fa-location-dot',
         fields: [
             { key: 'location', label: 'Address', type: 'text' },
             { key: 'city', label: 'City', type: 'text' },
@@ -36,6 +39,12 @@ const FIELD_GROUPS = [
     },
 ];
 
+function getInitials(name) {
+    const trimmed = (name || '').trim();
+    if (!trimmed) return '?';
+    return trimmed.split(/\s+/).map((p) => p[0]).slice(0, 2).join('').toUpperCase();
+}
+
 export default function Profile() {
     const { currentUser, updateProfile, loading } = useData();
     const navigate = useNavigate();
@@ -43,6 +52,13 @@ export default function Profile() {
     const [editing, setEditing] = useState(false);
     const [saving, setSaving] = useState(false);
     const [status, setStatus] = useState(null); // { type: 'success' | 'error', message }
+    const timeoutRef = useRef(null);
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, []);
 
     useEffect(() => {
         document.documentElement.classList.add('dashboard-active');
@@ -54,8 +70,8 @@ export default function Profile() {
     }, []);
 
     useEffect(() => {
-        if (currentUser) setForm(currentUser);
-    }, [currentUser]);
+        if (currentUser && !editing) setForm(currentUser);
+    }, [currentUser, editing]);
 
     useEffect(() => {
         if (!loading && !currentUser) {
@@ -68,8 +84,8 @@ export default function Profile() {
             <div id="dashboard-app">
                 <StarfieldBackground />
                 <Nav />
-                <div className="section-padding">
-                    <div className="site-container text-center text-gray-400">Loading profile…</div>
+                <div style={{ padding: '160px 20px', textAlign: 'center' }}>
+                    <p style={{ color: '#9ca3af', fontSize: '15px' }}>Loading profile…</p>
                 </div>
                 <Footer />
             </div>
@@ -84,6 +100,8 @@ export default function Profile() {
         e.preventDefault();
         setSaving(true);
         setStatus(null);
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
         try {
             await updateProfile(form);
             setStatus({ type: 'success', message: 'Profile updated successfully.' });
@@ -92,7 +110,7 @@ export default function Profile() {
             setStatus({ type: 'error', message: err.message || 'Failed to update profile.' });
         } finally {
             setSaving(false);
-            setTimeout(() => setStatus(null), 5000);
+            timeoutRef.current = setTimeout(() => setStatus(null), 5000);
         }
     };
 
@@ -106,43 +124,190 @@ export default function Profile() {
         <div id="dashboard-app">
             <StarfieldBackground />
             <Nav />
-            <section className="section-padding">
-                <div className="site-container" style={{ maxWidth: '840px' }}>
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
-                        <div className="flex items-center gap-4">
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shrink-0">
-                                {(form.name || '?').trim().split(/\s+/).map(p => p[0]).slice(0, 2).join('').toUpperCase()}
+
+            <section className="section-padding" style={{ paddingTop: '140px' }}>
+                <div style={{ maxWidth: '880px', width: '100%', margin: '0 auto', padding: '0 20px', boxSizing: 'border-box' }}>
+
+                    {/* ── Profile hero card ── */}
+                    <div
+                        style={{
+                            position: 'relative',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(255,255,255,0.08)',
+                            background: 'linear-gradient(160deg, rgba(59,130,246,0.10), rgba(139,92,246,0.06) 60%, rgba(11,14,23,0.4))',
+                            backdropFilter: 'blur(16px)',
+                            padding: '36px',
+                            marginBottom: '28px',
+                            overflow: 'hidden',
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '24px',
+                        }}
+                    >
+                        <div
+                            aria-hidden="true"
+                            style={{
+                                position: 'absolute',
+                                top: '-60px',
+                                right: '-60px',
+                                width: '220px',
+                                height: '220px',
+                                borderRadius: '50%',
+                                background: 'radial-gradient(circle, rgba(59,130,246,0.28), transparent 70%)',
+                                pointerEvents: 'none',
+                            }}
+                        />
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', position: 'relative', zIndex: 1 }}>
+                            <div
+                                style={{
+                                    width: '72px',
+                                    height: '72px',
+                                    minWidth: '72px',
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                                    boxShadow: '0 6px 24px rgba(59,130,246,0.35)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: '#fff',
+                                    fontSize: '26px',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.5px',
+                                }}
+                            >
+                                {getInitials(form.name)}
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-extrabold text-white">{form.name || 'Your Profile'}</h1>
-                                <p className="text-gray-400 text-sm mt-1">{form.email}</p>
+                                <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#fff', margin: 0 }}>
+                                    {form.name || 'Your Profile'}
+                                </h1>
+                                <p style={{ color: '#94a3b8', fontSize: '14px', margin: '6px 0 0' }}>
+                                    {form.email || 'No email on file'}
+                                </p>
+                                {form.role && (
+                                    <span
+                                        style={{
+                                            display: 'inline-block',
+                                            marginTop: '10px',
+                                            padding: '4px 12px',
+                                            borderRadius: '20px',
+                                            fontSize: '11px',
+                                            fontWeight: 600,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.6px',
+                                            color: '#93c5fd',
+                                            background: 'rgba(59,130,246,0.14)',
+                                            border: '1px solid rgba(59,130,246,0.28)',
+                                        }}
+                                    >
+                                        {form.role}
+                                    </span>
+                                )}
                             </div>
                         </div>
+
                         {!editing && (
-                            <button type="button" onClick={() => setEditing(true)} className="btn-primary px-5 py-2.5 text-sm shrink-0">
-                                <i className="fas fa-pen mr-2"></i> Edit Profile
+                            <button
+                                type="button"
+                                onClick={() => setEditing(true)}
+                                className="btn-primary"
+                                style={{ position: 'relative', zIndex: 1, fontSize: '14px', padding: '11px 26px', flexShrink: 0 }}
+                            >
+                                <i className="fas fa-pen" style={{ marginRight: '8px' }}></i>
+                                Edit Profile
                             </button>
                         )}
                     </div>
 
+                    {/* ── Status banner ── */}
                     {status && (
-                        <div className={`rounded-xl border px-5 py-3 mb-6 text-sm ${
-                            status.type === 'success'
-                                ? 'border-green-500/30 bg-green-500/10 text-green-400'
-                                : 'border-red-500/30 bg-red-500/10 text-red-400'
-                        }`}>
+                        <div
+                            style={{
+                                borderRadius: '12px',
+                                border: `1px solid ${status.type === 'success' ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}`,
+                                background: status.type === 'success' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
+                                color: status.type === 'success' ? '#4ade80' : '#f87171',
+                                padding: '14px 20px',
+                                marginBottom: '24px',
+                                fontSize: '14px',
+                            }}
+                        >
+                            <i className={`fas ${status.type === 'success' ? 'fa-circle-check' : 'fa-triangle-exclamation'}`} style={{ marginRight: '8px' }}></i>
                             {status.message}
                         </div>
                     )}
 
+                    {/* ── Field groups ── */}
                     <form onSubmit={handleSave}>
                         {FIELD_GROUPS.map((group) => (
-                            <div key={group.title} className="bg-dark-card border border-gray-800 rounded-2xl p-6 sm:p-8 mb-6">
-                                <h2 className="text-lg font-bold text-white mb-5">{group.title}</h2>
-                                <div className="grid sm:grid-cols-2 gap-4">
+                            <div
+                                key={group.title}
+                                style={{
+                                    background: 'rgba(15,20,32,0.6)',
+                                    border: '1px solid rgba(255,255,255,0.07)',
+                                    borderRadius: '18px',
+                                    padding: '28px',
+                                    marginBottom: '20px',
+                                    backdropFilter: 'blur(10px)',
+                                }}
+                            >
+                                <h2
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        fontSize: '15px',
+                                        fontWeight: 700,
+                                        color: '#fff',
+                                        margin: '0 0 20px',
+                                        letterSpacing: '0.2px',
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            width: '30px',
+                                            height: '30px',
+                                            borderRadius: '9px',
+                                            background: 'rgba(59,130,246,0.14)',
+                                            border: '1px solid rgba(59,130,246,0.25)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: '#60a5fa',
+                                            fontSize: '13px',
+                                        }}
+                                    >
+                                        <i className={`fas ${group.icon}`}></i>
+                                    </span>
+                                    {group.title}
+                                </h2>
+
+                                <div
+                                    style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                                        columnGap: '28px',
+                                        rowGap: '20px',
+                                    }}
+                                >
                                     {group.fields.map((field) => (
-                                        <div key={field.key} className="contact-field">
-                                            <label className="block text-xs font-medium text-gray-300 mb-1">{field.label}</label>
+                                        <div key={field.key}>
+                                            <label
+                                                style={{
+                                                    display: 'block',
+                                                    fontSize: '12px',
+                                                    fontWeight: 600,
+                                                    color: '#94a3b8',
+                                                    marginBottom: '7px',
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: '0.4px',
+                                                }}
+                                            >
+                                                {field.label}
+                                            </label>
                                             {editing ? (
                                                 <input
                                                     type={field.type}
@@ -150,10 +315,11 @@ export default function Profile() {
                                                     value={form[field.key] || ''}
                                                     onChange={(e) => handleChange(field.key, e.target.value)}
                                                     placeholder={field.label}
+                                                    style={{ fontSize: '14px', padding: '11px 14px' }}
                                                 />
                                             ) : (
-                                                <p className="text-sm text-gray-300 px-1 py-2 min-h-[38px]">
-                                                    {form[field.key] || <span className="text-gray-600">Not set</span>}
+                                                <p style={{ fontSize: '14.5px', color: '#e2e8f0', margin: 0, minHeight: '20px' }}>
+                                                    {form[field.key] || <span style={{ color: '#4b5563' }}>Not set</span>}
                                                 </p>
                                             )}
                                         </div>
@@ -163,15 +329,31 @@ export default function Profile() {
                         ))}
 
                         {editing && (
-                            <div className="flex gap-3">
-                                <button type="submit" disabled={saving} className="btn-primary px-6 py-2.5 text-sm disabled:opacity-60">
+                            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+                                <button
+                                    type="submit"
+                                    disabled={saving}
+                                    className="btn-primary"
+                                    style={{ fontSize: '14px', padding: '11px 28px', opacity: saving ? 0.6 : 1, cursor: saving ? 'default' : 'pointer' }}
+                                >
                                     {saving ? 'Saving…' : 'Save Changes'}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={handleCancel}
                                     disabled={saving}
-                                    className="px-6 py-2.5 text-sm rounded-full border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 transition"
+                                    style={{
+                                        fontSize: '14px',
+                                        padding: '11px 28px',
+                                        borderRadius: '40px',
+                                        border: '1px solid rgba(255,255,255,0.15)',
+                                        background: 'transparent',
+                                        color: '#cbd5e1',
+                                        cursor: saving ? 'default' : 'pointer',
+                                        transition: 'all 0.2s ease',
+                                    }}
+                                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; e.currentTarget.style.color = '#fff'; }}
+                                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.color = '#cbd5e1'; }}
                                 >
                                     Cancel
                                 </button>
@@ -180,6 +362,7 @@ export default function Profile() {
                     </form>
                 </div>
             </section>
+
             <Footer />
         </div>
     );
