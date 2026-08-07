@@ -41,9 +41,9 @@ class BusinessUserSerializer(serializers.ModelSerializer):
             "id", "name", "email", "phone", "referral", "role",
             "business", "type", "category", "location", "city", "state",
             "country", "pincode", "website", "username", "password",
-            "agree_marketing", "planet_id", "created_at",
+            "agree_marketing", "planet_id", "is_admin", "created_at",
         ]
-        read_only_fields = ["id", "created_at"]
+        read_only_fields = ["id", "is_admin", "created_at"]
 
     def create(self, validated_data):
         password = validated_data.pop("password", None)
@@ -52,6 +52,19 @@ class BusinessUserSerializer(serializers.ModelSerializer):
             user.set_password(password)
         user.save()
         return user
+
+
+class AdminUserSerializer(serializers.ModelSerializer):
+    """Used only on the admin user-management endpoints. Never exposes password_hash."""
+
+    class Meta:
+        model = BusinessUser
+        fields = [
+            "id", "name", "email", "phone", "business", "type", "category",
+            "city", "state", "country", "is_admin", "created_at",
+        ]
+        read_only_fields = ["id", "name", "email", "phone", "business", "type",
+                             "category", "city", "state", "country", "created_at"]
 
 
 class LoginSerializer(serializers.Serializer):

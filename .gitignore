@@ -1,6 +1,44 @@
-backend/venv/
-backend/db.sqlite3
+# ── Python / Django (backend) ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+backend/staticfiles/
+backend/media/
+venv/
+env/
+.venv/
+*.egg-info/
+.Python
+pip-log.txt
 
-frontend/node_modules/
-frontend/.env
-frontend/package.json
+# Django secrets / local settings
+.env
+.env.*
+!.env.example
+
+# ── Node / React / Vite (frontend) ──
+node_modules/
+frontend/dist/
+frontend/dist-ssr/
+.vite/
+*.local
+
+# npm/yarn/pnpm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Editors / OS ──
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Misc ──
+*.log
+.cache/

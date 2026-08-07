@@ -81,6 +81,16 @@ function ProfileMenu() {
           >
             <i className="fas fa-user text-primary w-4"></i> View Profile
           </button>
+          {currentUser.is_admin && (
+            <button
+              type="button"
+              onClick={() => { setOpen(false); navigate('/admin'); }}
+              className="w-full text-left text-sm text-gray-300 hover:text-white hover:bg-white/5 transition flex items-center gap-2"
+              style={{ padding: '12px 16px' }}
+            >
+              <i className="fas fa-shield-halved text-primary w-4"></i> Admin Panel
+            </button>
+          )}
           <button
             type="button"
             onClick={() => { setOpen(false); logout(); navigate('/'); }}

@@ -102,6 +102,7 @@ class BusinessUser(models.Model):
     agree_marketing = models.BooleanField(default=False)
     planet_id = models.CharField(max_length=50, blank=True)
     auth_token = models.CharField(max_length=64, blank=True, db_index=True)
+    is_admin = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -110,6 +111,19 @@ class BusinessUser(models.Model):
 
     def check_password(self, raw_password):
         return check_password(raw_password, self.password_hash)
+
+    # DRF's IsAuthenticated permission (and other auth-aware code) checks
+    # these attributes. BusinessUser isn't Django's auth User, so they're
+    # not present by default — if we've reached here via
+    # BusinessUserTokenAuthentication, the token was already validated,
+    # so this user is authenticated.
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
 
     def __str__(self):
         return self.email

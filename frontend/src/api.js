@@ -32,7 +32,7 @@ class ApiError extends Error {
 }
 
 /**
- * Core request helper. Adds the auth token (if present and required), JSON-encodes the
+ * Core request helper. Adds the auth token (if present), JSON-encodes the
  * body, and throws ApiError with the parsed error payload on non-2xx.
  */
 async function request(path, { method = 'GET', body, headers = {}, auth: requireAuth = false } = {}) {
@@ -92,6 +92,12 @@ export const team = resource('/team');
 export const testimonials = resource('/testimonials');
 export const pricing = resource('/pricing');
 
+export const adminUsers = {
+    list: () => request('/admin/users/', { auth: true }),
+    setAdmin: (id, is_admin) => request(`/admin/users/${id}/`, { method: 'PATCH', body: { is_admin }, auth: true }),
+    remove: (id) => request(`/admin/users/${id}/`, { method: 'DELETE', auth: true }),
+};
+
 export const auth = {
     async signup(payload) {
         const data = await request('/auth/signup/', { method: 'POST', body: payload });
@@ -117,4 +123,4 @@ export const auth = {
 
 export { ApiError };
 
-export default { services, projects, team, testimonials, pricing, auth, ApiError, getToken };
+export default { services, projects, team, testimonials, pricing, adminUsers, auth, ApiError, getToken };
