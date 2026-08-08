@@ -190,6 +190,8 @@
     transition: background .15s ease, color .15s ease;
 }
 .admin-icon-btn:hover { background: rgba(96,165,250,.15); color: #60a5fa; }
+.admin-icon-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.admin-icon-btn:disabled:hover { background: transparent; color: inherit; }
 .admin-icon-danger:hover { background: rgba(248,113,113,.15); color: #f87171; }
 
 /* ── Form ── */
@@ -286,6 +288,39 @@
 .admin-badge-gold {
     background: rgba(227,181,99,.15);
     color: #e3b563;
+}
+.admin-badge-super {
+    background: rgba(139,92,246,.18);
+    color: #a78bfa;
+}
+.admin-badge-pending {
+    background: rgba(239,68,68,.15);
+    color: #f87171;
+    margin-left: 8px;
+    font-size: 10px;
+}
+
+.admin-subtabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.admin-subtab {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #94a3b8;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+}
+.admin-subtab:hover { color: #e2e8f0; }
+.admin-subtab.active {
+    background: rgba(227,181,99,.15);
+    color: #e3b563;
+    border-color: rgba(227,181,99,.3);
 }
 
 /* ── Overview stat grid ── */

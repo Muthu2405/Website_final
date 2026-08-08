@@ -11,9 +11,22 @@ export default function LoginPortal({ onBack, onSwitchToSignup, onComplete }) {
     const [toastMsg, setToastMsg] = useState(null);
     const [submitting, setSubmitting] = useState(false);
 
+    // Set when the account (e.g. an admin-added developer) still has a
+    // temporary password — they must set their own before continuing.
+    const [pendingUser, setPendingUser] = useState(null);
+    const [newPass, setNewPass] = useState('');
+    const [newPass2, setNewPass2] = useState('');
+
     const showToast = (msg, type = 'error') => {
         setToastMsg({ msg, type });
         setTimeout(() => setToastMsg(null), 3000);
+    };
+
+    const finishLogin = (user) => {
+        showToast('Welcome back!', 'success');
+        setCurrentUser(user);
+        if (onComplete) onComplete(user);
+        navigate('/dashboard');
     };
 
     const handleSubmit = async (e) => {
@@ -27,16 +40,72 @@ export default function LoginPortal({ onBack, onSwitchToSignup, onComplete }) {
         setSubmitting(true);
         try {
             const user = await auth.login({ email, password: pass });
-            showToast('Welcome back!', 'success');
-            setCurrentUser(user);
-            if (onComplete) onComplete(user);
-            navigate('/dashboard');
+            if (user.must_change_password) {
+                setPendingUser(user);
+            } else {
+                finishLogin(user);
+            }
         } catch (err) {
             showToast(err instanceof ApiError ? err.message : 'Could not log in. Please try again.');
         } finally {
             setSubmitting(false);
         }
     };
+
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+        if (newPass.length < 6) {
+            showToast('New password must be at least 6 characters.');
+            return;
+        }
+        if (newPass !== newPass2) {
+            showToast('Passwords do not match.');
+            return;
+        }
+        setSubmitting(true);
+        try {
+            const updated = await auth.changePassword(pass, newPass);
+            finishLogin(updated);
+        } catch (err) {
+            showToast(err instanceof ApiError ? err.message : 'Could not update password.');
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    if (pendingUser) {
+        return (
+            <div className="overlay-view show" id="login-view">
+                <div className="overlay-bg"></div>
+                <div className="card login-card">
+                    <h3 className="login-title">Set a New Password</h3>
+                    <p className="sub login-sub">Your account was set up with a temporary password. Choose a new one to continue.</p>
+                    <form onSubmit={handleChangePassword}>
+                        <div className="step-content">
+                            <div className="field field-ic">
+                                <label>New Password *</label><span className="ic">🔒</span>
+                                <input required type="password" placeholder="Enter new password" value={newPass} onChange={e => setNewPass(e.target.value)} />
+                            </div>
+                            <div className="field field-ic">
+                                <label>Confirm Password *</label><span className="ic">🔒</span>
+                                <input required type="password" placeholder="Re-enter new password" value={newPass2} onChange={e => setNewPass2(e.target.value)} />
+                            </div>
+                            <div className="step-actions-row">
+                                <button className="btn-primary" type="submit" style={{ marginTop: 0, width: '100%' }} disabled={submitting}>
+                                    {submitting ? 'Saving…' : 'Set Password →'}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {toastMsg && (
+                    <div className={`toast show ${toastMsg.type}`} style={{ zIndex: 1000 }}>
+                        {toastMsg.msg}
+                    </div>
+                )}
+            </div>
+        );
+    }
 
     return (
         <div className="overlay-view show" id="login-view">
@@ -67,7 +136,7 @@ export default function LoginPortal({ onBack, onSwitchToSignup, onComplete }) {
                     <div className="step-content">
                         <div className="field field-ic">
                             <label>Email Address *</label><span className="ic">📧</span>
-                            <input required type="email" placeholder="Enter email address" value={email} onChange={e => setEmail(e.target.value)} />
+                            <input required type="email" placeholder="you@gmail.com" pattern=".+@gmail\.com" title="Must be a @gmail.com address" value={email} onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className="field field-ic">
                             <label>Password *</label><span className="ic">🔒</span>

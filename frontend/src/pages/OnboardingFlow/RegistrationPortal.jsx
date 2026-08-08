@@ -184,7 +184,7 @@ export default function RegistrationPortal({ planet, onBack, onComplete, onSwitc
                             <div style={{ fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--pcol)', marginBottom: '10px' }}>Tell us about yourself</div>
                             <div className="field field-ic"><label>Full Name *</label><span className="ic">👤</span><input required placeholder="Enter your full name" value={name} onChange={e => setName(e.target.value)} /></div>
                             <div className="field field-ic"><label>Mobile Number *</label><span className="ic">📱</span><input required type="tel" placeholder="Enter mobile number" value={phone} onChange={e => setPhone(e.target.value)} /></div>
-                            <div className="field field-ic"><label>Email Address *</label><span className="ic">📧</span><input required type="email" placeholder="Enter email address" value={email} onChange={e => setEmail(e.target.value)} /></div>
+                            <div className="field field-ic"><label>Email Address *</label><span className="ic">📧</span><input required type="email" placeholder="you@gmail.com" pattern=".+@gmail\.com" title="Must be a @gmail.com address" value={email} onChange={e => setEmail(e.target.value)} /></div>
                             <div className="field field-ic"><label>Referral Code (Optional)</label><span className="ic">🎁</span><input placeholder="Enter referral code" value={referral} onChange={e => setReferral(e.target.value)} /></div>
                             <div className="field"><label>Business Role *</label><select required value={role} onChange={e => setRole(e.target.value)}>
                                 <option value="">Select your role</option>

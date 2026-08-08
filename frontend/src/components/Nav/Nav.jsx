@@ -81,7 +81,7 @@ function ProfileMenu() {
           >
             <i className="fas fa-user text-primary w-4"></i> View Profile
           </button>
-          {currentUser.is_admin && (
+          {(currentUser.is_admin || currentUser.is_superuser) && (
             <button
               type="button"
               onClick={() => { setOpen(false); navigate('/admin'); }}
@@ -239,6 +239,15 @@ export default function Nav() {
               >
                 <i className="fas fa-user text-primary mr-2"></i> View Profile
               </button>
+              {(currentUser.is_admin || currentUser.is_superuser) && (
+                <button
+                  type="button"
+                  onClick={() => { closeMobileMenu(); navigate('/admin'); }}
+                  className="text-left py-2 text-base font-medium text-gray-300 hover:text-white transition-colors"
+                >
+                  <i className="fas fa-shield-halved text-primary mr-2"></i> Admin Panel
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => { closeMobileMenu(); logout(); navigate('/'); }}
