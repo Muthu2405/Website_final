@@ -31,8 +31,10 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = [
+    "api.velunai.in",
+    "websitefinal-production-9073.up.railway.app",
+]
 # Application definition
 
 INSTALLED_APPS = [
