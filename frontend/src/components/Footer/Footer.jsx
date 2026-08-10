@@ -47,7 +47,7 @@ export default function Footer() {
             <div className="bg-gray-500/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
             <div className="site-container grid gap-8 xl:grid-cols-3 xl:gap-8">
                 <div className="space-y-4 reveal">
-                    <span className="text-2xl font-extrabold">Agency<span className="text-primary">.</span></span>
+                    <span className="text-2xl font-extrabold">VelunAI<span className="text-primary">.</span></span>
                     <p className="text-gray-400 mt-8 text-sm md:mt-4 max-w-xs">
                         Building digital experiences that drive growth and innovation.
                     </p>
@@ -75,7 +75,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="site-container border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 reveal">
-                <p>&copy; {new Date().getFullYear()} Agency. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} VelunAI. All rights reserved.</p>
                 <div className="flex gap-4 mt-2 sm:mt-0">
                     <a href="#" onClick={e => e.preventDefault()} className="footer-link">Privacy Policy</a>
                     <a href="#" onClick={e => e.preventDefault()} className="footer-link">Terms & Conditions</a>

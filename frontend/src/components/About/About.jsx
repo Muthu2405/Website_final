@@ -23,7 +23,7 @@ export default function About() {
           <div className="reveal-left">
             <h3 className="text-2xl font-bold text-white">Our Story</h3>
             <p className="text-gray-400 mt-4 leading-relaxed">
-Founded in 2026, we began as a small freelance team with a bold vision to help businesses of all sizes establish a strong online presence. Since then, we've grown into a trusted digital agency, delivering high-quality web applications, custom software solutions, and digital transformation services that empower businesses to thrive in the digital world.
+Founded in 2026, we began as a small freelance team with a bold vision to help businesses of all sizes establish a strong online presence. Since then, we've grown into a trusted digital solutions, delivering high-quality web applications, custom software solutions, and digital transformation services that empower businesses to thrive in the digital world.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-6">
               {STORY_HIGHLIGHTS.map((item) => (

@@ -165,7 +165,7 @@ export default function Nav() {
                 <i className="fas fa-rocket text-white text-sm"></i>
             </div>
             <span className="text-xl font-bold font-display tracking-wide text-white">
-              Agency<span className="text-primary">.</span>
+              VelunAI<span className="text-primary">.</span>
             </span>
           </a>
 

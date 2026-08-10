@@ -30,50 +30,25 @@ export const DEVELOPERS = [
   },
   {
     id: 2,
-    name: "Navaneetha Krishnan",
-    role: "Frontend Developer",
-    experience: "2+ Years",
-    projects: "8+ Projects",
-    bio: "Frontend specialist crafting pixel-perfect, performant user interfaces with React ecosystem. Passionate about animation, accessibility, and developer experience.",
+    name: "Navaneetha Krishnan M D",
+    role: "Full Stack Developer",
+    experience: "1.5+ Years",
+    projects: "7+ Projects",
+    bio: "neeyea poodu",
     photo: "https://img.rocket.new/generatedImages/rocket_gen_img_195597aae-1772497150188.png",
     photoAlt: "Developer portrait, dark moody space station corridor, blue LED ambient lighting, atmospheric shadows, cinematic",
     technologies: [
-      "React", "Next.js", "TypeScript", "Tailwind CSS",
-      "Framer Motion", "GSAP", "Three.js", "React Three Fiber",
-      "GraphQL", "Storybook", "Jest", "Cypress"
+      "Python", "Django", "Flask", "FastAPI", "REST API",
+      "React", "TypeScript", "Next.js", "Tailwind CSS",
+      "PostgreSQL", "Docker", "GitHub Actions", "Agentic AI"
     ],
     contact: {
-      email: "navaneetha@example.com",
-      linkedin: "linkedin.com/in/navaneetha",
-      github: "github.com/navaneetha",
-      instagram: "@navaneetha",
-      phone: "+91-XXXXXXXXXX"
+      email: "naveenmd2004@gmail.com",
+      linkedin: "linkedin.com/in/navaneetha-krishnan-890a0027b",
+      github: "github.com/NavaneethaKrishnan2774",
+      portfolio: "https://portfolio-zeta-neon-62.vercel.app/"
     },
     accentColor: "#6b4fa5",
-    featured: false
-  },
-  {
-    id: 3,
-    name: "Ramya",
-    role: "Backend Engineer",
-    experience: "3+ Years",
-    projects: "12+ Projects",
-    bio: "Backend engineer designing scalable systems, APIs, and data architectures. Expert in cloud infrastructure, databases, and distributed systems.",
-    photo: "https://img.rocket.new/generatedImages/rocket_gen_img_1b7bd2969-1779628662236.png",
-    photoAlt: "Engineer portrait, dark server room background, cool blue server rack glow, deep cinematic shadows",
-    technologies: [
-      "Node.js", "Python", "Go", "PostgreSQL", "MongoDB",
-      "Redis", "Kubernetes", "Docker", "AWS", "Terraform",
-      "GraphQL", "gRPC", "Kafka", "Elasticsearch"
-    ],
-    contact: {
-      email: "ramya@example.com",
-      linkedin: "linkedin.com/in/ramya",
-      github: "github.com/ramya",
-      instagram: "@ramya_dev",
-      phone: "+91-XXXXXXXXXX"
-    },
-    accentColor: "#2a7a5a",
     featured: false
   }
 ];
