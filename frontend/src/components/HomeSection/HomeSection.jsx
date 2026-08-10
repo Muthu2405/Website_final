@@ -108,7 +108,7 @@ export default function HomeSection() {
               We Build <span className="text-primary">Amazing</span> Digital Experiences
             </h1>
             <p className="hero-description">
-              Full-stack development agency delivering modern, scalable, and high-performance web solutions tailored to your business.
+              Full-stack development solution delivering modern, scalable, and high-performance web solutions tailored to your business.
             </p>
             <div className="hero-cta">
               <a href="#contact" className="btn-primary"><i className="fas fa-paper-plane mr-2"></i> Get a Quote</a>

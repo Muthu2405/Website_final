@@ -381,8 +381,9 @@ function DeveloperModule({ developer, isRevealing, isClosing, phase }) {
                 <ContactIcon type="email" value={developer.contact.email} delay={0} visible={showContact} />
                 <ContactIcon type="linkedin" value={developer.contact.linkedin} delay={100} visible={showContact} />
                 <ContactIcon type="github" value={developer.contact.github} delay={200} visible={showContact} />
-                <ContactIcon type="instagram" value={developer.contact.instagram} delay={300} visible={showContact} />
-                <ContactIcon type="phone" value={developer.contact.phone} delay={400} visible={showContact} />
+                <ContactIcon type="portfolio" value={developer.contact.portfolio} delay={300} visible={showContact} />
+                <ContactIcon type="instagram" value={developer.contact.instagram} delay={400} visible={showContact} />
+                <ContactIcon type="phone" value={developer.contact.phone} delay={500} visible={showContact} />
               </div>
             </div>
           </div>

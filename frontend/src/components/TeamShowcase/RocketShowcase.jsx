@@ -19,29 +19,16 @@ const INITIAL_DEVELOPERS = [
   },
   {
     id: 2,
-    name: "Navaneetha Krishnan",
-    role: "Developer",
-    experience: "X+ Years",
-    projects: "X+ Projects",
-    bio: "Placeholder bio — add role details, focus areas, and highlights here.",
+    name: "Navaneetha Krishnan M D",
+    role: "Full Stack Developer",
+    experience: "1.5+ Years",
+    projects: "7+ Projects",
+    bio: "neeyea poodu",
     photo: "https://img.rocket.new/generatedImages/rocket_gen_img_195597aae-1772497150188.png",
     photoAlt: "Developer portrait, dark moody space station corridor, blue LED ambient lighting, atmospheric shadows, cinematic",
-    technologies: ["Add", "Tech", "Stack", "Here"],
-    contact: { email: "placeholder@example.com", linkedin: "linkedin.com/in/placeholder", github: "github.com/placeholder", instagram: "@placeholder", phone: "" },
+    technologies: ["Python", "Django", "Flask", "FastAPI", "REST API", "React", "TypeScript", "Next.js", "Tailwind CSS", "PostgreSQL", "Docker", "GitHub Actions", "Agentic AI"],
+    contact: { email: "naveenmd2004@gmail.com", linkedin: "linkedin.com/in/navaneetha-krishnan-890a0027b", github: "github.com/NavaneethaKrishnan2774", portfolio: "https://portfolio-zeta-neon-62.vercel.app/", instagram: "", phone: "" },
     rocketColor: "#6b4fa5"
-  },
-  {
-    id: 3,
-    name: "Ramya",
-    role: "Developer",
-    experience: "X+ Years",
-    projects: "X+ Projects",
-    bio: "Placeholder bio — add role details, focus areas, and highlights here.",
-    photo: "https://img.rocket.new/generatedImages/rocket_gen_img_1b7bd2969-1779628662236.png",
-    photoAlt: "Engineer portrait, dark server room background, cool blue server rack glow, deep cinematic shadows",
-    technologies: ["Add", "Tech", "Stack", "Here"],
-    contact: { email: "placeholder@example.com", linkedin: "linkedin.com/in/placeholder", github: "github.com/placeholder", instagram: "@placeholder", phone: "" },
-    rocketColor: "#2a7a5a"
   }
 ];
 function RocketShowcase() {
@@ -377,7 +364,10 @@ function RocketShowcase() {
               <div>{developer.contact.email}</div>
               <div>{developer.contact.linkedin}</div>
               <div>{developer.contact.github}</div>
-              <div>{developer.contact.instagram} &nbsp;·&nbsp; {developer.contact.phone}</div>
+              {developer.contact.portfolio && <div>{developer.contact.portfolio}</div>}
+              {(developer.contact.instagram || developer.contact.phone) && (
+                <div>{developer.contact.instagram}{developer.contact.instagram && developer.contact.phone ? ' \u00b7 ' : ''}{developer.contact.phone}</div>
+              )}
             </div>
           </div>
         </div>
