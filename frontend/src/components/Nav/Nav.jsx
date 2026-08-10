@@ -160,12 +160,12 @@ export default function Nav() {
     <nav className="nav-blur fixed w-full z-50 top-0">
       <div className="px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1280px', width: '100%', margin: '0 auto' }}>
         <div className="flex justify-between items-center h-16 sm:h-20">
-          <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="flex items-center gap-2" aria-label="Agency Home">
+          <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="flex items-center gap-2" aria-label="Velunai Home">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <i className="fas fa-rocket text-white text-sm"></i>
             </div>
             <span className="text-xl font-bold font-display tracking-wide text-white">
-              Agency<span className="text-primary">.</span>
+              Velunai<span className="text-primary">.</span>
             </span>
           </a>
 

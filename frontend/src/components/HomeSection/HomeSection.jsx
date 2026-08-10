@@ -116,11 +116,11 @@ export default function HomeSection() {
             </div>
             <div className="hero-stats">
               <div className="stat-item">
-                <span className="stat-number">50+</span>
+                <span className="stat-number">5+</span>
                 <span className="stat-label">Projects Delivered</span>
               </div>
               <div className="stat-item">
-                <span className="stat-number">30+</span>
+                <span className="stat-number">3+</span>
                 <span className="stat-label">Happy Clients</span>
               </div>
               <div className="stat-item">
