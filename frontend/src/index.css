@@ -2497,17 +2497,16 @@ section + section {
         }
         textarea.input-field {
             resize: vertical;
-            min-height: 80px;
+            min-height: 120px;
         }
 
         /* ── CONTACT — FORM FIELD SPACING ── */
         .contact-field {
-            margin-bottom: 14px; /* tighter spacing between each label+input group */
+            margin-bottom: var(--space-md); /* 24px between each label+input group */
         }
         .contact-field label {
             display: block;
-            margin-bottom: 6px;
-            font-size: 0.8125rem;
+            margin-bottom: 8px;
         }
         .contact-field:last-of-type {
             margin-bottom: 0;
@@ -3653,30 +3652,4 @@ html.dashboard-active, body.dashboard-active { height: auto !important; overflow
 @keyframes testimonials-scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(calc(-100% / var(--testimonials-reps, 2))); }
-}
-
-/* ── FAQ — HORIZONTAL LOOPING SCROLLER ── */
-.scroller-mask {
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-}
-@keyframes scroll-horizontal {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-.animate-scroll-horizontal {
-    animation: scroll-horizontal var(--scroll-duration, 40s) linear infinite;
-}
-.animate-scroll-horizontal-reverse {
-    animation: scroll-horizontal var(--scroll-duration, 40s) linear infinite reverse;
-}
-.scroller-mask:hover .animate-scroll-horizontal,
-.scroller-mask:hover .animate-scroll-horizontal-reverse {
-    animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-    .animate-scroll-horizontal,
-    .animate-scroll-horizontal-reverse {
-        animation: none;
-    }
 }

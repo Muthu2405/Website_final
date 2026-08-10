@@ -45,7 +45,7 @@ async function request(path, { method = 'GET', body, headers = {}, auth: require
         method,
         headers: {
             'Content-Type': 'application/json',
-            ...(requireAuth && token ? { Authorization: `Token ${token}` } : {}),
+            ...(token ? { Authorization: `Token ${token}` } : {}),
             ...headers,
         },
         body: body !== undefined ? JSON.stringify(body) : undefined,
@@ -92,30 +92,6 @@ export const team = resource('/team');
 export const testimonials = resource('/testimonials');
 export const pricing = resource('/pricing');
 
-// Users, Developers, and Admins live in separate DB tables on the backend.
-// Each directory below lists/removes its own table; "promote"/"demote" move
-// an account between tables (superuser-only on the backend).
-export const adminUsers = {
-    list: () => request('/admin/users/', { auth: true }),
-    remove: (id) => request(`/admin/users/${id}/`, { method: 'DELETE', auth: true }),
-    promote: (id) => request(`/admin/users/${id}/promote/`, { method: 'POST', auth: true }), // -> Admin
-};
-
-export const adminDevelopers = {
-    list: () => request('/admin/developers/', { auth: true }),
-    // Admin sets a temporary password; the developer must change it on first login.
-    create: (payload) => request('/admin/developers/', { method: 'POST', body: payload, auth: true }),
-    remove: (id) => request(`/admin/developers/${id}/`, { method: 'DELETE', auth: true }),
-    promote: (id) => request(`/admin/developers/${id}/promote/`, { method: 'POST', auth: true }), // -> Admin
-};
-
-export const adminAdmins = {
-    list: () => request('/admin/admins/', { auth: true }),
-    setSuperuser: (id, is_superuser) => request(`/admin/admins/${id}/`, { method: 'PATCH', body: { is_superuser }, auth: true }),
-    remove: (id) => request(`/admin/admins/${id}/`, { method: 'DELETE', auth: true }),
-    demote: (id) => request(`/admin/admins/${id}/demote/`, { method: 'POST', auth: true }), // -> User
-};
-
 export const auth = {
     async signup(payload) {
         const data = await request('/auth/signup/', { method: 'POST', body: payload });
@@ -135,12 +111,9 @@ export const auth = {
         }
     },
     me: () => request('/auth/me/', { auth: true }),
-    updateMe: (payload) => request('/auth/me/', { method: 'PATCH', body: payload, auth: true }),
-    changePassword: (current_password, new_password) =>
-        request('/auth/change-password/', { method: 'POST', body: { current_password, new_password }, auth: true }),
     isAuthenticated: () => Boolean(getToken()),
 };
 
 export { ApiError };
 
-export default { services, projects, team, testimonials, pricing, adminUsers, auth, ApiError, getToken };
+export default { services, projects, team, testimonials, pricing, auth, ApiError, getToken };

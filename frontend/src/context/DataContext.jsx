@@ -73,15 +73,6 @@ export function DataProvider({ children }) {
         setPricing: setPricingState,
         currentUser,
         setCurrentUser: setCurrentUserState,
-        updateProfile: async (payload) => {
-            const updated = await auth.updateMe(payload);
-            setCurrentUserState(updated);
-            return updated;
-        },
-        logout: async () => {
-            await auth.logout();
-            setCurrentUserState(null);
-        },
         loading,
         error,
     };

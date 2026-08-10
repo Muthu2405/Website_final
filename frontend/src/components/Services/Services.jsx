@@ -123,6 +123,7 @@ export default function Services() {
                                         ))}
                                     </div>
                                     <div className="card-footer">
+                                        <span className="font-semibold text-white">From {service.price || 'N/A'}</span>
                                         <span className="text-gray-400">{service.time || ''}</span>
                                     </div>
                                 </div>

@@ -172,9 +172,8 @@ export default function PlanetChooser({ onSelectPlanet, skipToRow = false }) {
         });
     }
 
-    // Row-layout planet count includes an empty leading slot (keeps the Sun
-    // from sitting flush against the left edge) and a decorative satellite
-    // at the end, matching the original spacing math.
+    // Row-layout planet count includes an admin satellite (index 0) and a
+    // decorative satellite at the end, matching the original spacing math.
     const totalSlots = ROW_PLANETS.length + 2;
 
     return (
@@ -261,6 +260,17 @@ function RowLayer({ textures, selectedId, locked, onSelect, totalSlots }) {
     return (
         <>
             <div id="row-layer" style={{ position: 'absolute', inset: 0 }}>
+                {/* Admin satellite — full admin dashboard isn't built yet, so this
+                    is a visual placeholder for now rather than a working login. */}
+                <div
+                    className="row-satellite admin-satellite"
+                    style={{ left: `${100 / (totalSlots - 1) * 0}%`, top: '52%' }}
+                    title="Admin (coming soon)"
+                >🛰️</div>
+                <div className={`row-sat-label admin-sat-label ${showCaptions ? 'show' : ''}`} style={{ left: `${100 / (totalSlots - 1) * 0}%`, top: 'calc(52% + 34px)' }}>
+                    🔑 Admin
+                </div>
+
                 {ROW_PLANETS.map((p, i) => {
                     const leftPct = (100 / (totalSlots - 1)) * (i + 1);
                     const isSun = p.isSun === true;

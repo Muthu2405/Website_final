@@ -4,40 +4,31 @@ import GlowCard from './GlowCard';
 
 const INITIAL_PRICING = [
     {
-        name: 'Starter',
-        desc: 'A focused, budget-friendly site to get your business online fast.',
-        price: '4,999',
-        priceNote: 'one-time payment',
-        ctaLabel: 'Get Started',
-        features: [
-            '1–3 pages', 'Responsive design', 'Contact form', 'Basic SEO',
-            'Basic animations', 'Deployment included', '7-day support'
-        ]
+        name: 'Basic',
+        desc: 'Free and open-source forever. Get started now.',
+        price: '0',
+        priceNote: 'Free forever',
+        ctaLabel: 'Get started for free',
+        features: ['1 website template', '9 blocks and sections', '4 custom animations']
     },
     {
-        name: 'Business',
-        desc: 'Our most popular plan — a fuller site with an admin panel and basic backend.',
-        price: '14,999',
+        name: 'Standard',
+        desc: 'Lifetime access. Free updates. No recurring fees.',
+        price: '499',
         priceNote: 'one-time payment',
+        priceSubNote: 'plus local taxes',
         popular: true,
-        ctaLabel: 'Get Started',
-        features: [
-            'Up to 7 pages', 'Responsive design', 'Contact form', 'Basic SEO',
-            'Advanced animations', 'Admin panel', 'Basic backend/API',
-            'Database included', 'Deployment included', '30-day support'
-        ]
+        ctaLabel: 'Get all-access',
+        features: ['Up to 15 pages', 'Admin dashboard & analytics', 'Advanced SEO setup', '30-day priority support']
     },
     {
         name: 'Premium',
-        desc: 'A full-scale build with advanced backend, SEO, and custom animations.',
-        price: '29,999+',
-        priceNote: 'starting at, one-time payment',
-        ctaLabel: 'Get Started',
-        features: [
-            '10–15+ pages', 'Responsive design', 'Contact form', 'Advanced SEO',
-            'Custom animations', 'Admin panel', 'Advanced backend/API',
-            'Database included', 'Deployment included', '60-day support'
-        ]
+        desc: 'Lifetime access. Free updates. No recurring fees.',
+        price: '2,499',
+        priceNote: 'one-time payment',
+        priceSubNote: 'plus local taxes',
+        ctaLabel: 'Get all-access for your team',
+        features: ['All pages, components & sections available for your entire team']
     }
 ];
 
@@ -56,7 +47,7 @@ export default function Pricing() {
                 <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mt-12 lg:mt-16 card-gap-lg">
                     {displayPricing.map((plan, idx) => {
                         const featuresArray = Array.isArray(plan.features) ? plan.features : (typeof plan.features === 'string' ? plan.features.split(',').map(s => s.trim()).filter(Boolean) : []);
-                        const priceDigits = String(plan.price).replace(/^[₹$]/, '');
+                        const priceDigits = String(plan.price).replace(/^\$/, '');
                         return (
                             <GlowCard
                                 key={idx}
@@ -67,7 +58,7 @@ export default function Pricing() {
                                 {plan.popular && <div className="popular-badge">Most Popular</div>}
 
                                 <div className="price-row">
-                                    <span className="dollar-sign">₹</span>
+                                    <span className="dollar-sign">$</span>
                                     <span className="price-value">{priceDigits}</span>
                                 </div>
                                 <p className="price-note">

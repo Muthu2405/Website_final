@@ -108,7 +108,7 @@ export default function HomeSection() {
               We Build <span className="text-primary">Amazing</span> Digital Experiences
             </h1>
             <p className="hero-description">
-              Full-stack development solutions delivering modern, scalable, and high-performance web solutions tailored to your business.
+              Full-stack development agency delivering modern, scalable, and high-performance web solutions tailored to your business.
             </p>
             <div className="hero-cta">
               <a href="#contact" className="btn-primary"><i className="fas fa-paper-plane mr-2"></i> Get a Quote</a>
@@ -116,11 +116,11 @@ export default function HomeSection() {
             </div>
             <div className="hero-stats">
               <div className="stat-item">
-                <span className="stat-number">5+</span>
+                <span className="stat-number">50+</span>
                 <span className="stat-label">Projects Delivered</span>
               </div>
               <div className="stat-item">
-                <span className="stat-number">3+</span>
+                <span className="stat-number">30+</span>
                 <span className="stat-label">Happy Clients</span>
               </div>
               <div className="stat-item">

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, Project, TeamMember, Testimonial, PricingPlan, User, Developer, Admin as AdminAccount
+from .models import Service, Project, TeamMember, Testimonial, PricingPlan, BusinessUser
 
 
 @admin.register(Service)
@@ -27,20 +27,7 @@ class PricingPlanAdmin(admin.ModelAdmin):
     list_display = ["name", "price", "order"]
 
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+@admin.register(BusinessUser)
+class BusinessUserAdmin(admin.ModelAdmin):
     list_display = ["name", "email", "business", "created_at"]
-    exclude = ["password_hash", "auth_token"]
-
-
-@admin.register(Developer)
-class DeveloperAdmin(admin.ModelAdmin):
-    list_display = ["name", "email", "skills", "created_at"]
-    exclude = ["password_hash", "auth_token"]
-
-
-@admin.register(AdminAccount)
-class AdminAccountAdmin(admin.ModelAdmin):
-    list_display = ["name", "email", "is_superuser", "created_at"]
-    list_filter = ["is_superuser"]
     exclude = ["password_hash", "auth_token"]

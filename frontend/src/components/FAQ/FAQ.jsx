@@ -39,47 +39,33 @@ export default function FAQ() {
     };
 
     return (
-        <section id="faq" className="section-padding bg-[radial-gradient(60%_260px_at_50%_0%,rgba(59,130,246,0.12),transparent)]">
+        <section id="faq" className="section-padding bg-[#0b0e17]/30">
             <div className="site-container">
                 <div className="section-intro mb-16 reveal">
                     <span className="text-primary font-semibold text-sm uppercase tracking-wider">FAQ</span>
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">Frequently Asked Questions</h2>
-                    <p className="text-gray-400 mt-4">Everything you need to know before getting started.</p>
+                    <p className="text-gray-400 mt-4">Everything you need to know before getting started.
+                </p>
                 </div>
-                <div className="flex flex-col gap-6 reveal" style={{ maxWidth: '640px', width: '100%', margin: '0 auto' }}>
+                <div className="bg-dark-card rounded-2xl p-6 sm:p-10 reveal space-y-3">
                     {FAQ_DATA.map((faq, index) => (
                         <div
                             key={index}
-                            className={`rounded-lg border transition-colors overflow-hidden ${
+                            className={`faq-item rounded-xl border transition-colors ${
                                 openIndex === index
-                                    ? 'border-primary/40 bg-white/[0.04]'
-                                    : 'border-gray-800 bg-dark-card'
+                                    ? 'border-primary/40 bg-white/[0.03]'
+                                    : 'border-gray-800'
                             }`}
                         >
-                            <button
-                                type="button"
-                                className="w-full flex items-center justify-between gap-6 text-left"
-                                style={{ paddingLeft: '20px', paddingRight: '20px', paddingTop: '8px', paddingBottom: '8px' }}
+                            <div
+                                className="faq-question flex justify-between items-center gap-6 text-white font-semibold cursor-pointer px-5 py-5 sm:py-6"
                                 onClick={() => toggleFAQ(index)}
                             >
-                                <span className="text-lg font-medium text-white">{faq.question}</span>
-                                <svg
-                                    width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                    className={`shrink-0 text-primary ${openIndex === index ? "rotate-180" : ""} transition-transform duration-300 ease-in-out`}
-                                >
-                                    <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-                            <div
-                                className={`grid transition-all duration-300 ease-in-out ${
-                                    openIndex === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                                }`}
-                            >
-                                <div className="overflow-hidden">
-                                    <p className="text-base text-gray-400 leading-relaxed pb-6" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-                                        {faq.answer}
-                                    </p>
-                                </div>
+                                <span className="leading-relaxed">{faq.question}</span>
+                                <i className={`fas fa-chevron-down text-primary shrink-0 transition-transform ${openIndex === index ? 'rotate-180' : ''}`}></i>
+                            </div>
+                            <div className={`faq-answer text-gray-400 leading-relaxed px-5 pb-5 sm:pb-6 ${openIndex !== index ? 'hidden' : ''}`}>
+                                {faq.answer}
                             </div>
                         </div>
                     ))}

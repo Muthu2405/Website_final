@@ -53,12 +53,8 @@ function TruckSVG({ developer, isHovering, phase }) {
           <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
         </linearGradient>
-        <filter id="truckShadow" x="-20%" y="-20%" width="140%" height="160%">
-          <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#000000" floodOpacity="0.55" />
-        </filter>
       </defs>
 
-      <g filter="url(#truckShadow)">
       <ellipse cx="270" cy="236" rx="235" ry="15" fill={accent} opacity="0.1" />
       <ellipse cx="270" cy="236" rx="235" ry="15" fill="url(#hoverGlow)" opacity="0.35" />
 
@@ -70,17 +66,6 @@ function TruckSVG({ developer, isHovering, phase }) {
       <path d="M330,40 L455,40 L448,178 L323,178 Z" fill="rgba(255,255,255,0.03)" />
       {[195, 235, 275, 315, 355, 395, 435].map((x, i) => (
         <line key={i} x1={x} y1="34" x2={x - 8} y2="184" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-      ))}
-
-      {/* Panel seams + rivets for surface depth */}
-      {[52, 112].map((y, i) => (
-        <line key={`seam-${i}`} x1="150" y1={y} x2="472" y2={y} stroke="#04060a" strokeWidth="1" opacity="0.5" />
-      ))}
-      {[170, 220, 270].map((x, i) => (
-        <g key={`rivrow-${i}`}>
-          <circle cx={x} cy="40" r="1.4" fill="#0a0e13" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
-          <circle cx={x} cy="178" r="1.4" fill="#0a0e13" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
-        </g>
       ))}
 
       <rect x="150" y="30" width="322" height="158" rx="10" fill="none" stroke={accent} strokeWidth="0.6" opacity="0.25" />
@@ -100,34 +85,8 @@ function TruckSVG({ developer, isHovering, phase }) {
       ))}
 
       <rect x="452" y="150" width="16" height="26" rx="3" fill="#171b21" stroke="#454f5c" strokeWidth="1" />
-      <circle
-        cx="460"
-        cy="163"
-        r="4"
-        fill="url(#thrusterCore)"
-        style={{ animation: "enginePulse 1.1s ease-in-out infinite alternate", transformOrigin: "460px 163px" }}
-      />
-      <path
-        d="M471,159 Q484,163 471,167 Q476,163 471,159 Z"
-        fill={accent}
-        opacity="0.75"
-        style={{ animation: "flameFlicker 0.35s ease-in-out infinite alternate", transformOrigin: "471px 163px" }}
-      />
+      <circle cx="460" cy="163" r="4" fill="url(#thrusterCore)" />
       <line x1="474" y1="163" x2="486" y2="163" stroke={accent} strokeWidth="1.5" opacity="0.5" />
-      {[0, 1, 2].map((i) => (
-        <circle
-          key={`smoke-${i}`}
-          cx="474"
-          cy="163"
-          r="2"
-          fill={accent}
-          opacity="0.35"
-          style={{
-            animation: "smokeRise 1.6s ease-out infinite",
-            animationDelay: `${i * 0.5}s`,
-          }}
-        />
-      ))}
 
       <path d="M42,186 L42,110 Q42,96 55,92 L92,92 Q104,92 111,80 L124,54 Q129,44 141,44 L150,44 L150,186 Z" fill="url(#cabHull)" stroke="#04060a" strokeWidth="1.5" />
       <path d="M42,110 L92,92 Q98,98 96,108 L48,124 Z" fill="url(#hullSheen)" opacity="0.5" />
@@ -135,21 +94,6 @@ function TruckSVG({ developer, isHovering, phase }) {
       <path d="M100,82 L118,54 L127,54 L110,82 Z" fill="rgba(220,250,255,0.45)" />
       <path d="M97,68 L104,68 L101,80 L96,80 Z" fill={accent} opacity="0.3" />
       <line x1="92" y1="92" x2="92" y2="186" stroke="rgba(0,0,0,0.4)" strokeWidth="1" />
-
-      {/* Roof antenna */}
-      <line x1="118" y1="44" x2="118" y2="24" stroke="#454f5c" strokeWidth="1.5" />
-      <circle
-        cx="118"
-        cy="22"
-        r="2.4"
-        fill={accent}
-        style={{ animation: "ledPulse 1.2s ease-in-out infinite" }}
-      />
-
-      {/* Cab surface rivets */}
-      {[100, 130].map((y, i) => (
-        <circle key={`cabriv-${i}`} cx="47" cy={y} r="1.3" fill="#0a0e13" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
-      ))}
 
       <line x1="52" y1="98" x2="80" y2="98" stroke={accent} strokeWidth="0.8" opacity="0.45" />
       <rect x="46" y="136" width="10" height="26" rx="2" fill="#0d1013" stroke="#3a424c" strokeWidth="1" />
@@ -173,7 +117,6 @@ function TruckSVG({ developer, isHovering, phase }) {
       ))}
 
       <line x1="60" y1="188" x2="460" y2="188" stroke={accent} strokeWidth="1" opacity="0.45" />
-      </g>
 
       <rect x="469" y="150" width="0" height="0" fill="none" style={{ animation: phase === "departing" ? "ledPulse 0.4s ease-in-out infinite" : "none" }} />
     </svg>
