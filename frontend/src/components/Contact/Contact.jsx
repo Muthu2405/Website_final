@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 export default function Contact({
     title = "Contact Us",
     description = "We are available for questions, feedback, or collaboration opportunities. Let us know how we can help!",
-    email = "velunai02724@gmail.com.com",
-    web = { label: "velunai", url: "www.velunai.in" },
+    phone = "+1 (555) 123-4567",
+    email = "hello@agency.com",
+    web = { label: "agency.com", url: "https://agency.com" },
 }) {
     const [status, setStatus] = useState('');
 

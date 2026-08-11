@@ -75,7 +75,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="site-container border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 reveal">
-                <p>&copy; {new Date().getFullYear()} Velunai.in All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Velunai. All rights reserved.</p>
                 <div className="flex gap-4 mt-2 sm:mt-0">
                     <a href="#" onClick={e => e.preventDefault()} className="footer-link">Privacy Policy</a>
                     <a href="#" onClick={e => e.preventDefault()} className="footer-link">Terms & Conditions</a>

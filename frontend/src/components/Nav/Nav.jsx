@@ -39,7 +39,7 @@ function ProfileMenu() {
 
   if (!currentUser) {
     return (
-      <a href="#contact" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="btn-primary text-sm px-5 py-2">
+      <a href="#contact" onClick={(e) => { e.preventDefault(); navigate('/get-started'); }} className="btn-primary text-sm px-5 py-2">
         <i className="fas fa-paper-plane mr-2"></i> Get Started
       </a>
     );

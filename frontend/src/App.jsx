@@ -9,7 +9,7 @@ import { DataProvider, useData } from './context/DataContext';
 function AdminRoute() {
   const { currentUser, loading } = useData();
   if (loading) return null;
-  if (!currentUser?.is_admin && !currentUser?.is_superuser) return <Navigate to="/dashboard" replace />;
+  if (!currentUser?.is_admin && !currentUser?.is_superuser) return <Navigate to="/" replace />;
   return <AdminPortal />;
 }
 
@@ -18,8 +18,9 @@ export default function App() {
     <BrowserRouter>
       <DataProvider>
         <Routes>
-          <Route path="/" element={<Onboarding />} />
-          <Route path="/dashboard" element={<RequirePasswordReset><Dashboard /></RequirePasswordReset>} />
+          <Route path="/" element={<RequirePasswordReset><Dashboard /></RequirePasswordReset>} />
+          <Route path="/get-started" element={<Onboarding />} />
+          <Route path="/dashboard" element={<Navigate to="/" replace />} />
           <Route path="/profile" element={<RequirePasswordReset><Profile /></RequirePasswordReset>} />
           <Route path="/admin" element={<RequirePasswordReset><AdminRoute /></RequirePasswordReset>} />
         </Routes>

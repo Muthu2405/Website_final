@@ -504,8 +504,8 @@ export default function AdminPortal() {
         <div className="admin-root">
             <StarfieldBackground />
             <aside className="admin-sidebar">
-                <div className="admin-brand" onClick={() => navigate('/dashboard')}>
-                    <i className="fas fa-rocket"></i> Agency<span>.</span>
+                <div className="admin-brand" onClick={() => navigate('/')}>
+                    <i className="fas fa-rocket"></i> Velunai<span>.</span>
                 </div>
                 <nav className="admin-nav">
                     {SECTIONS.map((s) => (
@@ -518,7 +518,7 @@ export default function AdminPortal() {
                         </button>
                     ))}
                 </nav>
-                <button className="admin-back" onClick={() => navigate('/dashboard')}>
+                <button className="admin-back" onClick={() => navigate('/')}>
                     <i className="fas fa-arrow-left"></i> Back to Site
                 </button>
             </aside>

@@ -20,7 +20,7 @@ export default function WhyUs() {
             <div className="site-container">
                 <div className="section-intro mb-12 reveal">
                     <span className="text-primary font-semibold text-sm uppercase tracking-wider">Why Us</span>
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">Why Choose Our Agency</h2>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">Why Choose Velunai</h2>
                     <p className="text-gray-400 mt-4">We deliver quality, reliability, and value with every project.
                 </p>
                 </div>

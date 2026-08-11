@@ -26,7 +26,7 @@ export default function LoginPortal({ onBack, onSwitchToSignup, onComplete }) {
         showToast('Welcome back!', 'success');
         setCurrentUser(user);
         if (onComplete) onComplete(user);
-        navigate('/dashboard');
+        navigate('/');
     };
 
     const handleSubmit = async (e) => {
